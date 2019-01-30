@@ -1,0 +1,32 @@
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe.config
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.pdb
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csprojAssemblyReference.cache
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csproj.CoreCompileInputs.cache
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+c:\users\adminl\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe.config
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csprojAssemblyReference.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csproj.CoreCompileInputs.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_VFinale_ModifPat\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csprojAssemblyReference.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csproj.CoreCompileInputs.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\ProjetBoVoyage 1\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csprojAssemblyReference.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csproj.CoreCompileInputs.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe.config
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage1.2\Dimitri_Nils_V en cours\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csprojAssemblyReference.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\obj\Debug\BoVoyage.csproj.CoreCompileInputs.cache
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe.config
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe
+\\webnet21\Formation\_Nous_Groupe\SAILLARD Nils\Projet\ProjetBoVoyage2.1\BoVoyageNicolasNils\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.pdb
