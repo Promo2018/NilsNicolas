@@ -174,6 +174,7 @@ namespace ConsoleApp4.Vue
                         OutilVue.Dev("Recherche de voyageurs par mot clef");
                         break;
                     case "4":
+                        voyageur1.Reinit();
                         PersonneBDD.RechercherVoyageur(voyageur1);
                         break;
                     case "5":

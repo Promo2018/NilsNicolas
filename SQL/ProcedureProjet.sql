@@ -1,7 +1,7 @@
 use BoVoyageNN;
 
---##################################
--- trigger pour ajouter l'âge à la table Personnes
+--####################################################################################################
+-- Trigger pour ajouter l'âge à la table Personnes en se basant sur la date de naissance
 
 create trigger age on Personnes after insert as
 begin
@@ -10,44 +10,61 @@ update Personnes set age = cast(cast(CURRENT_TIMESTAMP as datetime)
 end
 go
 
---##################################
--- trigger pour ajouter l'âge à la table PArtDoss
+-- drop trigger age
 
-create trigger age on ParticipDoss after insert, update as
+
+--####################################################################################################
+-- trigger pour ajouter la réduction au personne de moins de 12 ans
+
+create trigger reduction on Personnes after insert, update as
+IF exists ( select * from Personnes)
 begin
-update Personnes set age = cast(cast(CURRENT_TIMESTAMP as datetime)
-- cast(date_naissance as datetime) as int)/ 365
-from ParticipDoss, Personnes
-where Personnes.ID_personne = ParticipDoss.ID_participant;
+update Personnes set reduction = 0.6 where participant = 1 and age < 12;
 end
 go
 
-drop trigger age;
-delete from Personnes where nom = 'ROUX';
-
---##################################
-select * from Personnes where nom = 'roux' and prenom = 'nicolas';
-select * from Personnes
+-- drop trigger reduction
 
 
---##################################
--- executable procédure
+--####################################################################################################
+-- procedure permettant d'afficher la table personne entière
+
+CREATE PROCEDURE Voir
+AS
+begin
+SELECT *  FROM  Personnes;
+end
+go
+
+-- exec Voir
+-- drop procedure voir
+
+--####################################################################################################
+-- création de view Voyage Dossier Agence
+
+CREATE VIEW VoyageDossierAgence
+ AS SELECT Do.ID_dossier, Do.etatDossier, Do.prixTotal, Do.raisonAnnulation, P.civ, P.nom, P.prenom, P.tel, P.email, V.dateAller, V.dateRetour, D.continent, D.pays, D.region, A.nomAgence, Ass.type_assurance 
+ FROM Voyages V, Agences A, Destinations D, Dossiers Do, Personnes P, Assurances Ass
+ WHERE D.ID_destination = V.ID_destination and A.ID_agence = V.ID_agence and V.ID_voyage = Do.ID_voyage and P.ID_personne = Do.ID_client;
+  go
+-- select * from VoyageDossierAgence
+-- drop view VoyageDossierAgence
 
 
-values ('M', 'roux', 'manu', '08/11/1992',' ' , '7 che', '951101' , 'sannois', 0660572272);
+ --####################################################################################################
+ -- création de view Dossier nb participant
 
-insert into AgenceVoyages(nom) values ('Voyaparadise')
+ CREATE VIEW ParticipantVoyage
+ AS SELECT P.nom, P.prenom, D.ID_dossier
+ FROM Personnes P, Dossiers D, ParticipDoss Pd
+ WHERE P.participant = 1 and P.ID_personne = Pd.ID_participant and Pd.ID_dossier = D.ID_dossier ;
+ go
+ -- select * from ParticipantVoyage
+ -- drop view ParticipantVoyage
 
--- insert personnes
-insert into Personnes (civ, nom, prenom, date_naissance, age, adresse, tel, email, client, participant, reduction) 
-values ('M', 'roux', 'manu', '08/11/1992', 0 ,'7 che', '0660572272' , 'gqergrqeg@egqrg', 1, 1,0);
 
 
 
-/*
-drop procedure insertVoyageur;
-drop procedure insertDestination;
-drop procedure insertEmployees ;
-drop procedure insertDossier;
-*/
+
+
 

@@ -1,31 +1,40 @@
 use BoVoyageNN;
+
+--#################################################################################################################
+-- Insert Authentifications
+
+insert into Authentifications (identifiant, mdp) values ('admin', 'password');
+insert into Authentifications (identifiant, mdp) values ('client', 'voyage89');
+insert into Authentifications (identifiant, mdp) values ('marketing', 'conseil42');
+
+
 --#################################################################################################################
 -- Insert Personnes
 
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Beck','Whilemina','17/02/2009','Ap #245-2016 Duis St.','03 78 58 80 69','sodales.elit@elitdictum.com',0, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Chang','Meredith','09/12/1967','Ap #878-9210 Pharetra Av.','06 92 93 06 81','bibendum@elitEtiam.ca',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Morrison','Joy','15/05/1946','P.O. Box 472, 8823 Etiam Avenue','06 04 22 06 89','pellentesque@sitametrisus.ca',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Page','Jeanette','14/05/2018','P.O. Box 164, 5582 Nec Road','07 25 41 22 13','nisl.sem.consequat@necurna.org',1, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Petty','Farrah','07/08/1949','P.O. Box 379, 2932 Tristique Avenue','01 24 01 57 11','molestie.pharetra@quam.net',0, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Sherman','Tobias','01/11/1960','Ap #994-8387 Faucibus Rd.','05 10 18 59 88','nunc.interdum@vel.org',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','William','Erich','05/12/1996','Ap #845-917 Sapien. Rd.','01 64 08 71 86','Praesent.luctus.Curabitur@adipiscingnon.co.uk',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Maldonado','Zenaida','28/12/1959','Ap #493-2903 Quisque Ave','09 10 62 85 12','primis.in@in.org',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Ramsey','Gemma','23/03/2012','Ap #136-6267 Consectetuer Ave','01 02 40 26 42','velit.Pellentesque@velitSed.org',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Stevens','Alexander','16/06/1989','Ap #777-6856 Gravida. Ave','02 62 24 43 43','Maecenas@Maurisut.net',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Strickland','Regan','12/01/1974','7699 Vitae, Rd.','03 35 25 47 33','venenatis.lacus.Etiam@aliquetlobortis.edu',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Donovan','Aurora','26/09/1952','Ap #266-9530 Hendrerit Avenue','01 73 58 42 96','pulvinar@Suspendisse.edu',0, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Santiago','Lisandra','07/09/1973','Ap #210-6933 Sapien. Rd.','09 23 13 34 96','dis.parturient@Pellentesquehabitant.org',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Miles','Michael','30/08/1983','P.O. Box 610, 1919 Velit Ave','07 45 71 73 48','Maecenas.iaculis.aliquet@Nullamsuscipitest.ca',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Olson','Abdul','17/03/1960','Ap #888-8252 Suspendisse St.','08 79 20 85 16','vel.est@euismodac.org',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Juarez','Keefe','12/05/1953','Ap #702-5396 Ligula Rd.','09 09 60 10 06','Sed.molestie@amet.net',1, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Macias','Sophia','20/08/1999','4114 Ut, Rd.','03 94 78 45 49','at.libero@tinciduntcongueturpis.com',1, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Bridges','Lyle','05/02/1959','P.O. Box 214, 7804 Sagittis St.','09 73 18 78 96','metus@arcuVestibulumante.edu',1, 0);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Russell','Ashton','18/03/1973','Ap #129-2302 Tincidunt Rd.','08 55 40 64 23','rutrum@risusInmi.net',1, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Colon','Cullen','09/09/1958','Ap #420-6459 Nunc Avenue','07 34 00 57 10','diam@eleifendCrassed.net',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Cazal','Marine','05/09/1962','36 rue Nunc Avenue','07 68 00 47 10','jira@eleclodCrassed.fr',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Rihdo','Claire','19/02/1984','48 chemin de la rivière','06 68 48 62 10','minet@chiris.fr',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Marc','George','23/05/1998','67 avenue de la marne','06 84 69 62 10','jagra@novice.fr',0, 1);
-INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Julien','Leaps','28/11/1966','95 boulevard de la rep','08 68 69 92 10','GLM@basic.fr',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Beck','While''mina','17/02/2009','Ap #245-2016 Duis St.','0378588069','sodales.elit@elitdictum.com',0, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Chang','Meredith','09/12/1967','Ap #878-9210 Pharetra Av.','0692930681','bibendum@elitEtiam.ca',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Morrison','Joy','15/05/1946','P.O. Box 472, 8823 Etiam Avenue','0604220689','pellentesque@sitametrisus.ca',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Page','Jeanette','14/05/2018','P.O. Box 164, 5582 Nec Road','0725412213','nisl.sem.consequat@necurna.org',1, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Petty','Farrah','07/08/1949','P.O. Box 379, 2932 Tristique Avenue','0124015711','molestie.pharetra@quam.net',0, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Sherman','Tobias','01/11/1960','Ap #994-8387 Faucibus Rd.','0510185988','nunc.interdum@vel.org',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','William','Erich','05/12/1996','Ap #845-917 Sapien. Rd.','0164087186','Praesent.luctus.Curabitur@adipiscingnon.co.uk',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Maldonado','Zenaida','28/12/1959','Ap #493-2903 Quisque Ave','0910628512','primis.in@in.org',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Ramsey','Gemma','23/03/2012','Ap #136-6267 Consectetuer Ave','0102402642','velit.Pellentesque@velitSed.org',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Stevens','Alexander','16/06/1989','Ap #777-6856 Gravida. Ave','0262244343','Maecenas@Maurisut.net',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Strickland','Regan','12/01/1974','7699 Vitae, Rd.','0335254733','venenatis.lacus.Etiam@aliquetlobortis.edu',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Donovan','Aurora','26/09/1952','Ap #266-9530 Hendrerit Avenue','0173584296','pulvinar@Suspendisse.edu',0, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Santiago','Lisandra','07/09/1973','Ap #210-6933 Sapien. Rd.','0923133496','dis.parturient@Pellentesquehabitant.org',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Miles','Michael','30/08/1983','P.O. Box 610, 1919 Velit Ave','0745717348','Maecenas.iaculis.aliquet@Nullamsuscipitest.ca',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Olson','Abdul','17/03/1960','Ap #888-8252 Suspendisse St.','0879208516','vel.est@euismodac.org',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Juarez','Keefe','12/05/1953','Ap #702-5396 Ligula Rd.','0909601006','Sed.molestie@amet.net',1, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Macias','Sophia','20/08/1999','4114 Ut, Rd.','0394784549','at.libero@tinciduntcongueturpis.com',1, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Bridges','Lyle','05/02/1959','P.O. Box 214, 7804 Sagittis St.','0973187896','metus@arcuVestibulumante.edu',1, 0);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Russell','Ashton','18/03/1973','Ap #129-2302 Tincidunt Rd.','0855406423','rutrum@risusInmi.net',1, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Colon','Cullen','09/09/1958','Ap #420-6459 Nunc Avenue','0734005710','diam@eleifendCrassed.net',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Cazal','Marine','05/09/1962','36 rue Nunc Avenue','0768004710','jira@eleclodCrassed.fr',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('Mme','Rihdo','Claire','19/02/1984','48 chemin de la rivière','0668486210','minet@chiris.fr',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Marc','George','23/05/1998','67 avenue de la marne','0684696210','jagra@novice.fr',0, 1);
+INSERT INTO Personnes(civ,nom,prenom,date_naissance,adresse,tel,email,client,participant) VALUES('M','Julien','Leaps','28/11/1966','95 boulevard de la rep','0868699210','GLM@basic.fr',0, 1);
 
 
 --#################################################################################################################

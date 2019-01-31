@@ -45,11 +45,15 @@
     <Compile Include="Controler\Agence.cs" />
     <Compile Include="Controler\Controle.cs" />
     <Compile Include="Controler\Personne.cs" />
+    <Compile Include="Controler\Voyage.cs" />
     <Compile Include="Model\AccessBase.cs" />
     <Compile Include="Controler\Assurance.cs" />
     <Compile Include="Controler\Destination.cs" />
     <Compile Include="Controler\DossierReservation.cs" />
+    <Compile Include="Model\AgenceBDD.cs" />
+    <Compile Include="Model\DestinationBDD.cs" />
     <Compile Include="Model\PersonneBDD.cs" />
+    <Compile Include="Model\VoyageBDD.cs" />
     <Compile Include="Vue\MenuVoyageur.cs" />
     <Compile Include="Vue\MenuDossier.cs" />
     <Compile Include="Vue\MenuP.cs" />
