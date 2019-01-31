@@ -50,7 +50,7 @@ namespace ConsoleApp4.Model
             if (voyageura.Datenaissance > DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture)) { requete += "date_naissance = '" + voyageura.Datenaissance.ToString("dd / MM / yy") + "' and "; }
             if (voyageura.Age > -1) { requete += "ID_personne = " + voyageura.Age + " and "; }
             if (!string.IsNullOrEmpty(voyageura.Adresse)) { requete += "adresse = '" + voyageura.Adresse + "' and "; }
-            if (!string.IsNullOrEmpty(voyageura.Tel)) { requete += "tel = " + voyageura.Tel + " and "; }
+            if (!string.IsNullOrEmpty(voyageura.Tel)) { requete += "tel = '" + voyageura.Tel + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Email)) { requete += "email = '" + voyageura.Email + "' and "; }
             requete += " 1 = 1";
 

@@ -30,6 +30,7 @@ namespace ConsoleApp4.Controler
             Nom = nom;
             Prenom = prenom;
             Datenaissance = datenaissance.Date;
+            Adresse = adresse;
             Age = age;
             Tel = tel;
             Email = email;

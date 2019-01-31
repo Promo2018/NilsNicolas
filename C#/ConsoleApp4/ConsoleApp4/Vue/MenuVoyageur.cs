@@ -173,7 +173,7 @@ namespace ConsoleApp4.Vue
                         OutilVue.Dev("Recherche de voyageurs par mot clef");
                         break;
                     case "4":
-                        OutilVue.Dev("Afficher tout les voyageurs");
+                        PersonneBDD.RechercherVoyageur(voyageur1);
                         break;
                     case "5":
                         break;
