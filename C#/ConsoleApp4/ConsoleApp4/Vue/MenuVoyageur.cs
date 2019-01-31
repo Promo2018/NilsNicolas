@@ -18,7 +18,7 @@ namespace ConsoleApp4.Vue
             OutilVue.Afficher("\n\n*****Menu Voyageur*****");
             List<string> listmenuV = new List<string>() { "1", "2", "3", "4", "5", "6" };
             OutilVue.Sep(7, "***** ");
-            OutilVue.Afficher("Que voulez-vous faire ? \n\t 1. Créer Nouveau Voyageur \n\t 2. Rechercher/Modifier un Voyageur \n\t 3. Recherche par mot clef \n\t 4.Afficher la liste de tout les voyageurs \n\t 5.retour au menu precedent \n\t 6.Fermer le Programme");
+            OutilVue.Afficher("Que voulez-vous faire ? \n\t 1. Créer Nouveau Voyageur \n\t 2. Rechercher/Modifier un Voyageur \n\t 3. Recherche par mot clef \n\t 4. Afficher la liste de tout les voyageurs \n\t 5. retour au menu precedent \n\t 6. Fermer le Programme");
             string saisie = OutilVue.Demander();
 
             if (listmenuV.Contains(saisie))
@@ -85,6 +85,7 @@ namespace ConsoleApp4.Vue
                         Personne vnul = new Personne();
                         while (sema9)
                         {
+                            voyageur2.Reinit();
                             bool sema10 = true;
                             while (sema10)
                             {
@@ -113,7 +114,7 @@ namespace ConsoleApp4.Vue
                                         bool sema11 = OutilVue.Precedent("modifier (un de) ce(s) voyageur");
                                         if (sema11)
                                         {
-                                            voyageur3 = vnul;
+                                            voyageur3.Reinit();
                                             switch (listeR.Count)
                                             {
                                                 case 1:
@@ -151,7 +152,7 @@ namespace ConsoleApp4.Vue
                                                     break;
                                             }
                                             PersonneBDD.Update(voyageur3);
-                                            PersonneBDD.RechercherVoyageur(voyageur3);
+                                            
 
                                         }
 

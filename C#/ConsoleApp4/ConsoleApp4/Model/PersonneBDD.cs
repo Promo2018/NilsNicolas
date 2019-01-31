@@ -48,7 +48,7 @@ namespace ConsoleApp4.Model
             if (!string.IsNullOrEmpty(voyageura.Nom)) { requete += "nom = '" + voyageura.Nom + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Prenom)) { requete += "prenom = '" + voyageura.Prenom + "' and "; }
             if (voyageura.Datenaissance > DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture)) { requete += "date_naissance = '" + voyageura.Datenaissance.ToString("dd / MM / yy") + "' and "; }
-            if (voyageura.Age > -1) { requete += "ID_personne = " + voyageura.Age + " and "; }
+            if (voyageura.Age > -1) { requete += "age = " + voyageura.Age + " and "; }
             if (!string.IsNullOrEmpty(voyageura.Adresse)) { requete += "adresse = '" + voyageura.Adresse + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Tel)) { requete += "tel = '" + voyageura.Tel + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Email)) { requete += "email = '" + voyageura.Email + "' and "; }
@@ -61,12 +61,12 @@ namespace ConsoleApp4.Model
                 BDD.ConnectBDD();
                 DataSet ds = BDD.Selectpersonne(requete);
                
-                Personne vide = new Personne();
+                
                 if (ds.Tables["Resultats"].Rows.Count > 0)
                 {
                     foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
                     {
-                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"]), Int32.Parse(ligne["age"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString());
+                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"].ToString()), Int32.Parse(ligne["age"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString(), Int32.Parse(ligne["client"].ToString()), Int32.Parse(ligne["participant"].ToString()), float.Parse(ligne["reduction"].ToString()));
                         maListe.Add(per);
                     }
                     foreach (Personne elem in maListe) { PersonneVue.AfficherVoyageur(elem); }
@@ -154,7 +154,7 @@ namespace ConsoleApp4.Model
                         BDD.Access("update Personnes set adresse = '" + recup.Adresse + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "6":
-                        BDD.Access("update Personnes set tel = " + recup.Tel.ToString() + " where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set tel = " + recup.Tel + " where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "7":
                         BDD.Access("update Personnes set email = '" + recup.Email + "' where ID_personne = " + recup.Id_personne + ";");
@@ -165,7 +165,7 @@ namespace ConsoleApp4.Model
                         break;
                 }
                 OutilVue.Afficher("Modification du voyageur transmise au serveur");
-
+                RechercherVoyageur(recup);
                 sema2 = OutilVue.Precedent("modifier un autre donnée de cette personne");
 
 
