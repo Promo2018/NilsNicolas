@@ -62,6 +62,8 @@ namespace ConsoleApp4.Vue
 
         }
 
+        // modifie un objet personne par attribut settable
+
         public static void Modifier(ref Personne recup)
         {
             string choix;

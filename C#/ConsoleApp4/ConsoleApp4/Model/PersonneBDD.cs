@@ -25,9 +25,10 @@ namespace ConsoleApp4.Model
             {
                 AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
                 BDD.ConnectBDD();
-                BDD.Access("insert into Personnes (civ, nom, prenom, date_naissance, age, adresse, tel, email) values ('" + recup.Civ +
-                    "','" + recup.Nom + "','" + recup.Prenom + "','" + recup.Datenaissance + "'," + recup.Age + ",'" + recup.Adresse + "','" + recup.Tel + "','" +
-                    recup.Email + "');");
+                string requete = "insert into Personnes (civ, nom, prenom, date_naissance, age, adresse, tel, email) values ('" + recup.Civ +
+                    "','" + recup.Nom.Replace("'", "''") + "','" + recup.Prenom.Replace("'", "''") + "','" + recup.Datenaissance + "'," + recup.Age + ",'" + recup.Adresse.Replace("'", "''") + "','" + recup.Tel + "','" +
+                    recup.Email + "');";
+                BDD.Access(requete);
                 BDD.DisconBDD();
                 OutilVue.Afficher("Le Nouveau Voyageur a bien été enregistré");
             }
@@ -39,20 +40,22 @@ namespace ConsoleApp4.Model
 
         }
 
+        // methode qui recherche un voyageur à partir des attributs d un objet objet voyageur et renvoie la liste des results trouvé sous forme d objets voyageur
         public static List<Personne>RechercherVoyageur(Personne voyageura)
         {
+
 
             string requete = "select * from Personnes where ";
             if (voyageura.Id_personne > -1) { requete += "ID_personne = " + voyageura.Id_personne + " and "; }
             if (!string.IsNullOrEmpty(voyageura.Civ)) { requete += "civ = '" + voyageura.Civ + "' and "; }
-            if (!string.IsNullOrEmpty(voyageura.Nom)) { requete += "nom = '" + voyageura.Nom + "' and "; }
-            if (!string.IsNullOrEmpty(voyageura.Prenom)) { requete += "prenom = '" + voyageura.Prenom + "' and "; }
-            if (voyageura.Datenaissance > DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture)) { requete += "date_naissance = '" + voyageura.Datenaissance.ToString("dd / MM / yy") + "' and "; }
+            if (!string.IsNullOrEmpty(voyageura.Nom)) { requete += "nom = '" + voyageura.Nom.Replace("'", "''") + "' and "; }
+            if (!string.IsNullOrEmpty(voyageura.Prenom)) { requete += "prenom = '" + voyageura.Prenom.Replace("'", "''") + "' and "; }
+            if (voyageura.Datenaissance > DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture)) { requete += "date_naissance = '" + voyageura.Datenaissance.ToString("dd/MM/yyyy") + "' and "; }
             if (voyageura.Age > -1) { requete += "age = " + voyageura.Age + " and "; }
-            if (!string.IsNullOrEmpty(voyageura.Adresse)) { requete += "adresse = '" + voyageura.Adresse + "' and "; }
+            if (!string.IsNullOrEmpty(voyageura.Adresse)) { requete += "adresse = '" + voyageura.Adresse.Replace("'", "''") + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Tel)) { requete += "tel = '" + voyageura.Tel + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Email)) { requete += "email = '" + voyageura.Email + "' and "; }
-            requete += " 1 = 1";
+            requete += " 1 = 1;";
 
             List<Personne> maListe = new List<Personne>();
             try
@@ -64,12 +67,15 @@ namespace ConsoleApp4.Model
                 
                 if (ds.Tables["Resultats"].Rows.Count > 0)
                 {
+                    int i = 0;
                     foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
                     {
+                        i = i + 1;
                         Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"].ToString()), Int32.Parse(ligne["age"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString(), Int32.Parse(ligne["client"].ToString()), Int32.Parse(ligne["participant"].ToString()), float.Parse(ligne["reduction"].ToString()));
                         maListe.Add(per);
                     }
                     foreach (Personne elem in maListe) { PersonneVue.AfficherVoyageur(elem); }
+                    OutilVue.Afficher("Resultat de la Requete : "+i+" correspondance(s) trouvées");
 
                     
 
@@ -83,13 +89,15 @@ namespace ConsoleApp4.Model
             return maListe;
         }
 
+        //methode pour modifier un objet personne et updater ses modifs sur la BDD 
+
         public static void Update( Personne recup)
         {
             string choix;
             bool sema2;
             AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
             BDD.ConnectBDD();
-
+            //modifier l'objet personne
             do
             {
 
@@ -135,6 +143,7 @@ namespace ConsoleApp4.Model
                         OutilVue.Afficher("Erreur menu modifier objet Personne");
                         break;
                 }
+                // requete d update
                 OutilVue.Afficher("Modification du Voyageur ...");
                 switch (choix)
                 {
@@ -142,19 +151,19 @@ namespace ConsoleApp4.Model
                         BDD.Access("update Personnes set civ = '" + recup.Civ + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "2":
-                        BDD.Access("update Personnes set prenom = '" + recup.Prenom + "' where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set prenom = '" + recup.Prenom.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "3":
-                        BDD.Access("update Personnes set nom = '" + recup.Nom + "' where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set nom = '" + recup.Nom.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "4":
                         BDD.Access("update Personnes set date_naissance = '" + recup.Datenaissance.ToString() + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "5":
-                        BDD.Access("update Personnes set adresse = '" + recup.Adresse + "' where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set adresse = '" + recup.Adresse.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "6":
-                        BDD.Access("update Personnes set tel = " + recup.Tel + " where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set tel = '" + recup.Tel + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "7":
                         BDD.Access("update Personnes set email = '" + recup.Email + "' where ID_personne = " + recup.Id_personne + ";");

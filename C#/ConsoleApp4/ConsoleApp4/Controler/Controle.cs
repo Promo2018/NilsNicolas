@@ -490,6 +490,12 @@ namespace ConsoleApp4.Controler
 
         }
 
+        //double la ' pour les parametre à mettre dans les requetes
+        public static void doublecote(ref string saisie)
+        {
+
+        }
+
     }
 
 }

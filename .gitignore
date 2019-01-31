@@ -1,2 +1,7 @@
-/C#/ConsoleApp4/ConsoleApp4/bin/*
-/C#/ConsoleApp4/ConsoleApp4/obj/*
+obj
+properties
+.vs
+
+obj/
+
+Obj/**
