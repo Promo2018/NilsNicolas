@@ -15,7 +15,40 @@ namespace ConsoleApp4.Model
 
         }
 
-        public static void AjouterVoy(Voyage recup)
+        public static List<Voyage> RechercherVoyage(DossierReservation recup)
+        {
+            string requete = "select * from Voyages V, Dossiers D where V.ID_voyage = D.ID_voyage and D.ID_dossier = " + recup.Id_dossier + ";";
+
+            List<Voyage> voyage1 = new List<Voyage>();
+            try
+            {
+                AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
+                BDD.ConnectBDD();
+                DataSet ds = BDD.Select(requete);
+
+                if (ds.Tables["Resultats"].Rows.Count > 0)
+                {
+                    int i = 0;
+                    foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
+                    {
+                        i = i + 1;
+                        Voyage per = new Voyage(Int32.Parse(ligne["ID_voyage"].ToString()), Convert.ToDateTime(ligne["dateAller"].ToString()), Convert.ToDateTime(ligne["dateRetour"].ToString()), Int32.Parse(ligne["placeDispo"].ToString()), ligne["tarifToutCompris"].ToString(), Int32.Parse(ligne["ID_destination"].ToString()), Int32.Parse(ligne["ID_agence"].ToString()));
+                        voyage1.Add(per);
+                    }
+                    foreach (Voyage elem in voyage1) { VoyageVue.AfficherVoyage(elem); }
+                    OutilVue.Afficher("Resultat de la Requete : " + i + " correspondance(s) trouvées");
+
+                }
+            }
+            catch (Exception erreur)
+            {
+                OutilVue.Afficher("### Erreur de requete select dans la BDD ### : /n" + erreur);
+            }
+
+            return voyage1;
+        }
+
+        /*public static void AjouterVoy(Voyage recup)
         {
             try
             {
@@ -32,6 +65,6 @@ namespace ConsoleApp4.Model
             }
 
 
-        }
+        }*/
     }
 }

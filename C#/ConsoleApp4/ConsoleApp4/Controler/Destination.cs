@@ -10,7 +10,21 @@ namespace ConsoleApp4.Model
     {
         public Destination()
         {
+            Id_destination = -1;
+            Continent = null;
+            Pays = null;
+            Region = null;
+            Descriptif = null;
 
+        }
+
+        public Destination(int id_destination, string continent, string pays, string region, string descriptif)
+        {
+            Id_destination = id_destination;
+            Continent = continent;
+            Pays = pays;
+            Region = region;
+            Descriptif = descriptif;
 
         }
 

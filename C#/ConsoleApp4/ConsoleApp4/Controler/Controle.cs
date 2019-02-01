@@ -490,6 +490,62 @@ namespace ConsoleApp4.Controler
 
         }
 
+        //controle de saisie de l'Id obligatoire
+        public static void CIdDoss(ref DossierReservation dossier1)
+        {
+            bool sema8 = true;
+            while (sema8)
+            {
+                string saisie = OutilVue.Demander("Numero de dossier");
+                if (ZeroOuVide(saisie))
+                {
+                    OutilVue.Afficher("Ce champ est obligatoire");
+                }
+                else
+                {
+                    if (OnlyNumber(saisie))
+                    {
+                        sema8 = false;
+                        dossier1.Id_dossier = Int32.Parse(saisie);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }
+
+        }
+
+        //controle de saisie de l'Id obligatoire
+        public static void CIdClient(ref DossierReservation dossier1)
+        {
+            bool sema8 = true;
+            while (sema8)
+            {
+                string saisie = OutilVue.Demander("Identifiant unique");
+                if (ZeroOuVide(saisie))
+                {
+                    OutilVue.Afficher("Ce champ est obligatoire");
+                }
+                else
+                {
+                    if (OnlyNumber(saisie))
+                    {
+                        sema8 = false;
+                        dossier1.Id_client = Int32.Parse(saisie);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }
+
+        }
+
         //double la ' pour les parametre à mettre dans les requetes
         public static void doublecote(ref string saisie)
         {

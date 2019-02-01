@@ -23,6 +23,15 @@ namespace ConsoleApp4.Controler
             Participant = -1;
             Reduction = -1;
 
+        }
+
+        public Personne(int id_personne, string civ, string nom, string prenom, float reduction)
+        {
+            Id_personne = id_personne;
+            Civ = civ;
+            Nom = nom;
+            Prenom = prenom;
+            Reduction = reduction;
 
         }
 

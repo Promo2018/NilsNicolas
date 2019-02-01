@@ -33,8 +33,6 @@ namespace ConsoleApp4.Model
 
         }
 
-
-
         public static List<DossierReservation> RechercherDossier(DossierReservation recup)
         {
             string requete = "select * from Dossiers where ";
@@ -65,8 +63,6 @@ namespace ConsoleApp4.Model
                     foreach (DossierReservation elem in ListeDossier) { DossierReservationVue.AfficherDossier(elem); }
                     OutilVue.Afficher("Resultat de la Requete : " + i + " correspondance(s) trouvées");
 
-
-
                 }
             }
             catch (Exception erreur)
@@ -76,6 +72,79 @@ namespace ConsoleApp4.Model
 
             return ListeDossier;
         }
+
+
+        public static List<Personne> RechercherClientDossier(DossierReservation recup)
+        {
+            string requete = "Select * from Personnes P, Dossiers D where P.ID_personne = D.ID_client and ID_dossier = " + recup.Id_dossier + ";";
+
+            List<Personne> client = new List<Personne>();
+            try
+            {
+
+                AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
+                BDD.ConnectBDD();
+                DataSet ds = BDD.Select(requete);
+
+                if (ds.Tables["Resultats"].Rows.Count > 0)
+                {
+                    int i = 0;
+                    foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
+                    {
+                        i = i + 1;
+                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString(), Int32.Parse(ligne["client"].ToString()), Int32.Parse(ligne["participant"].ToString()), float.Parse(ligne["reduction"].ToString()));
+                        client.Add(per);
+                    }
+                    foreach (Personne elem in client) { PersonneVue.AfficherVoyageur(elem); }
+                    OutilVue.Afficher("Resultat de la Requete : " + i + " correspondance(s) trouvées");
+
+                }
+            }
+            catch (Exception erreur)
+            {
+                OutilVue.Afficher("### Erreur de requete select dans la BDD ### : /n" + erreur);
+            }
+
+            return client;
+        }
+
+
+        public static List<Personne> ListeaParticpant(DossierReservation recup)
+        {
+            string requete = "Select P.nom, P.prenom, D.ID_dossier from Personnes P, Dossiers D, ParticipDoss Pd where D.ID_dossier = " + recup.Id_dossier + " " +
+                "and P.ID_personne = Pd.ID_participant and Pd.ID_dossier = D.ID_dossier; ";
+
+
+            List<Personne> client = new List<Personne>();
+            try
+            {
+                AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
+                BDD.ConnectBDD();
+                DataSet ds = BDD.Select(requete);
+
+                if (ds.Tables["Resultats"].Rows.Count > 0)
+                {
+                    int i = 0;
+                    foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
+                    {
+                        i = i + 1;
+                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), float.Parse(ligne["reduction"].ToString()));
+                        client.Add(per);
+                    }
+                    foreach (Personne elem in client) { PersonneVue.AfficherVoyageur(elem); }
+                    OutilVue.Afficher("Resultat de la Requete : " + i + " correspondance(s) trouvées");
+
+                }
+            }
+            catch (Exception erreur)
+            {
+                OutilVue.Afficher("### Erreur de requete select dans la BDD ### : /n" + erreur);
+            }
+
+            return client;
+        }
+
+
 
         public static void Update(DossierReservation recup)
         {

@@ -55,6 +55,7 @@
     <Compile Include="Model\DossierReservationBDD.cs" />
     <Compile Include="Model\PersonneBDD.cs" />
     <Compile Include="Model\VoyageBDD.cs" />
+    <Compile Include="Vue\DestinationVue.cs" />
     <Compile Include="Vue\DossierReservationVue.cs" />
     <Compile Include="Vue\MenuVoyageur.cs" />
     <Compile Include="Vue\MenuDossier.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Vue\OutilVue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vue\PersonneVue.cs" />
+    <Compile Include="Vue\VoyageVue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

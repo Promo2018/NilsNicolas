@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,25 @@ namespace ConsoleApp4.Controler
     {
         public Voyage()
         {
+            Id_voyage = -1;
+            DateAller = DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture);
+            DateRetour = DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture);
+            PlaceDispo = -1;
+            TarifTC = null;
+            Id_destination = -1;
+            Id_agence = -1;
 
+        }
+
+        public Voyage(int id_voyage, DateTime dateAller, DateTime dateRetour, int placeDispo, string tarifTC, int id_destination, int id_agence)
+        {
+            Id_voyage = id_voyage;
+            DateAller = dateAller;
+            DateRetour = dateRetour;
+            PlaceDispo = placeDispo;
+            TarifTC = tarifTC;
+            Id_destination = id_destination;
+            Id_agence = id_voyage;
         }
 
         private int id_voyage;

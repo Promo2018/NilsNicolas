@@ -15,7 +15,44 @@ namespace ConsoleApp4.Model
 
         }
 
-        public static void AjouterDest(Destination recup)
+
+        public static List<Destination> RechercherDestination(Voyage recup)
+        {
+            string requete = "select * from Destination D, Voyages D where V.ID_destination = D.ID_destination and D.ID_voyage = " + recup.Id_voyage + ";";
+
+            List<Destination> dest = new List<Destination>();
+            try
+            {
+                AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
+                BDD.ConnectBDD();
+                DataSet ds = BDD.Select(requete);
+
+                if (ds.Tables["Resultats"].Rows.Count > 0)
+                {
+                    int i = 0;
+                    foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
+                    {
+                        i = i + 1;
+                        Destination d = new Destination(Int32.Parse(ligne["ID_destination"].ToString()), ligne["continent"].ToString(), ligne["pays"].ToString(), ligne["region"].ToString(), ligne["descriptif"].ToString());
+                        dest.Add(d);
+                    }
+                    foreach (Destination elem in dest) { DestinationVue.AfficherDestination(elem); }
+                    OutilVue.Afficher("Resultat de la Requete : " + i + " correspondance(s) trouvées");
+
+                }
+            }
+            catch (Exception erreur)
+            {
+                OutilVue.Afficher("### Erreur de requete select dans la BDD ### : /n" + erreur);
+            }
+
+            return dest;
+        }
+
+
+
+
+        /*public static void AjouterDest(Destination recup)
         {
             try
             {
@@ -32,6 +69,6 @@ namespace ConsoleApp4.Model
             }
 
 
-        }
+        }*/
     }
 }
