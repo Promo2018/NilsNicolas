@@ -1,7 +1,3 @@
-obj
-properties
-.vs
-
-obj/
-
-Obj/**
+/C#/ConsoleApp4/ConsoleApp4/obj
+/C#/ConsoleApp4/ConsoleApp4/Properties
+/C#/ConsoleApp4/.vs
