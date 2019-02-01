@@ -63,7 +63,7 @@ namespace ConsoleApp4.Model
 
         // ##################################################
         // Affichage de la BDD
-        public DataSet Selectpersonne(String requete)
+        public DataSet Select(String requete)
         {
             try
             {

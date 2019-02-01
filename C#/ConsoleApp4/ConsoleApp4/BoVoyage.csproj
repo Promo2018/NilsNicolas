@@ -52,8 +52,10 @@
     <Compile Include="Controler\DossierReservation.cs" />
     <Compile Include="Model\AgenceBDD.cs" />
     <Compile Include="Model\DestinationBDD.cs" />
+    <Compile Include="Model\DossierReservationBDD.cs" />
     <Compile Include="Model\PersonneBDD.cs" />
     <Compile Include="Model\VoyageBDD.cs" />
+    <Compile Include="Vue\DossierReservationVue.cs" />
     <Compile Include="Vue\MenuVoyageur.cs" />
     <Compile Include="Vue\MenuDossier.cs" />
     <Compile Include="Vue\MenuP.cs" />

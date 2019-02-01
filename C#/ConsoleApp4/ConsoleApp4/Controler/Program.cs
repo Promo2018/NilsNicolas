@@ -1,4 +1,5 @@
-﻿using ConsoleApp4.Vue;
+﻿using ConsoleApp4.Model;
+using ConsoleApp4.Vue;
 
 namespace ConsoleApp4.Controler
 
@@ -8,6 +9,7 @@ namespace ConsoleApp4.Controler
         static void Main(string[] args)
         {
             MenuP acceuil = new MenuP();
+           
             OutilVue.Quitter();
             
         }

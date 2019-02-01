@@ -25,9 +25,9 @@ namespace ConsoleApp4.Model
             {
                 AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
                 BDD.ConnectBDD();
-                string requete = "insert into Personnes (civ, nom, prenom, date_naissance, age, adresse, tel, email) values ('" + recup.Civ +
-                    "','" + recup.Nom.Replace("'", "''") + "','" + recup.Prenom.Replace("'", "''") + "','" + recup.Datenaissance + "'," + recup.Age + ",'" + recup.Adresse.Replace("'", "''") + "','" + recup.Tel + "','" +
-                    recup.Email + "');";
+                string requete = "insert into Personnes (civ, nom, prenom, date_naissance, adresse, tel, email) values ('" + recup.Civ +
+                    "','" + recup.Nom.Replace("'", "''") + "','" + recup.Prenom.Replace("'", "''") + "','" + recup.Datenaissance + "','" + recup.Adresse.Replace("'", "''") + "','" + recup.Tel + "','" +
+                    recup.Email.Replace("'", "''") + "');";
                 BDD.Access(requete);
                 BDD.DisconBDD();
                 OutilVue.Afficher("Le Nouveau Voyageur a bien été enregistré");
@@ -51,10 +51,9 @@ namespace ConsoleApp4.Model
             if (!string.IsNullOrEmpty(voyageura.Nom)) { requete += "nom = '" + voyageura.Nom.Replace("'", "''") + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Prenom)) { requete += "prenom = '" + voyageura.Prenom.Replace("'", "''") + "' and "; }
             if (voyageura.Datenaissance > DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture)) { requete += "date_naissance = '" + voyageura.Datenaissance.ToString("dd/MM/yyyy") + "' and "; }
-            if (voyageura.Age > -1) { requete += "age = " + voyageura.Age + " and "; }
             if (!string.IsNullOrEmpty(voyageura.Adresse)) { requete += "adresse = '" + voyageura.Adresse.Replace("'", "''") + "' and "; }
             if (!string.IsNullOrEmpty(voyageura.Tel)) { requete += "tel = '" + voyageura.Tel + "' and "; }
-            if (!string.IsNullOrEmpty(voyageura.Email)) { requete += "email = '" + voyageura.Email + "' and "; }
+            if (!string.IsNullOrEmpty(voyageura.Email)) { requete += "email = '" + voyageura.Email.Replace("'", "''") + "' and "; }
             requete += " 1 = 1;";
 
             List<Personne> maListe = new List<Personne>();
@@ -62,7 +61,7 @@ namespace ConsoleApp4.Model
             {
                 AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
                 BDD.ConnectBDD();
-                DataSet ds = BDD.Selectpersonne(requete);
+                DataSet ds = BDD.Select(requete);
                
                 
                 if (ds.Tables["Resultats"].Rows.Count > 0)
@@ -71,7 +70,7 @@ namespace ConsoleApp4.Model
                     foreach (DataRow ligne in ds.Tables["Resultats"].Rows)
                     {
                         i = i + 1;
-                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"].ToString()), Int32.Parse(ligne["age"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString(), Int32.Parse(ligne["client"].ToString()), Int32.Parse(ligne["participant"].ToString()), float.Parse(ligne["reduction"].ToString()));
+                        Personne per = new Personne(Int32.Parse(ligne["ID_personne"].ToString()), ligne["civ"].ToString(), ligne["nom"].ToString(), ligne["prenom"].ToString(), Convert.ToDateTime(ligne["date_naissance"].ToString()), ligne["adresse"].ToString(), ligne["tel"].ToString(), ligne["email"].ToString(), Int32.Parse(ligne["client"].ToString()), Int32.Parse(ligne["participant"].ToString()), float.Parse(ligne["reduction"].ToString()));
                         maListe.Add(per);
                     }
                     foreach (Personne elem in maListe) { PersonneVue.AfficherVoyageur(elem); }
@@ -166,7 +165,7 @@ namespace ConsoleApp4.Model
                         BDD.Access("update Personnes set tel = '" + recup.Tel + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
                     case "7":
-                        BDD.Access("update Personnes set email = '" + recup.Email + "' where ID_personne = " + recup.Id_personne + ";");
+                        BDD.Access("update Personnes set email = '" + recup.Email.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
                         break;
 
                     default:
