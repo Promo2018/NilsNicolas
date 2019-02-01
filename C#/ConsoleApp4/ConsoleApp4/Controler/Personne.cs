@@ -34,7 +34,11 @@ namespace ConsoleApp4.Controler
             Prenom = prenom;
             Datenaissance = datenaissance.Date;
             Adresse = adresse;
-            Age = age;
+            Age = DateTime.Now.Year - datenaissance.Year;
+            if (DateTime.Now.Month < datenaissance.Month || DateTime.Now.Month == datenaissance.Month && DateTime.Now.Day < datenaissance.Day)
+            { Age--; }
+            else
+            { }
             Tel = tel;
             Email = email;
             Client = client;
@@ -241,6 +245,14 @@ namespace ConsoleApp4.Controler
                 }
 
             }
+        }
+
+        // affiche la liste de tous les voyageurs
+        public static void Tous()
+        {
+            Personne voyageur1 = new Personne();
+            voyageur1.Reinit();
+            PersonneBDD.RechercherVoyageur(voyageur1);
         }
 
     }

@@ -79,7 +79,7 @@ namespace ConsoleApp4.Vue
                 //en cas d erreur de saisie
                 else
                 {
-                    OutilVue.Afficher("Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", ou \"4\" comme indiqué dans le menu");
+                    OutilVue.Afficher("Entree Invalide; Veuillez Saisir \"1\", \"2\" ou \"3\" comme indiqué dans le menu");
                     OutilVue.Pause();
                 }
                 OutilVue.Afficher("\n\n*****Menu Principal*****");

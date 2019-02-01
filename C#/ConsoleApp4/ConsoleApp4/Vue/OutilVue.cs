@@ -158,7 +158,7 @@ namespace ConsoleApp4.Vue
         {
             OutilVue.Afficher("\n");
             OutilVue.Sep(7, "##### ");
-            OutilVue.Afficher(fonction + " non disponible. La Fonction " + fonction + " est en cours de developpement");
+            OutilVue.Afficher(fonction + " non disponible. La Fonction \"" + fonction + "\" est en cours de developpement");
             OutilVue.Pause();
 
         }

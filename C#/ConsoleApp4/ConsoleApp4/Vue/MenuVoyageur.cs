@@ -11,9 +11,7 @@ namespace ConsoleApp4.Vue
     {
         public MenuVoyageur()
         {
-            //PersonneBDD bddvoyageur = new PersonneBDD();
-            PersonneVue affichagevoyageur = new PersonneVue();
-            Personne voyageur1 = new Personne();
+            
             OutilVue.Sep(7);
             OutilVue.Afficher("\n\n*****Menu Voyageur*****");
             List<string> listmenuV = new List<string>() { "1", "2", "3", "4", "5", "6" };
@@ -42,8 +40,8 @@ namespace ConsoleApp4.Vue
                         OutilVue.Dev("Recherche de voyageurs par mot clef");
                         break;
                     case "4":
-                        voyageur1.Reinit();
-                        PersonneBDD.RechercherVoyageur(voyageur1);
+
+                        Personne.Tous();
                         break;
                     case "5":
                         break;
@@ -61,7 +59,7 @@ namespace ConsoleApp4.Vue
 
             else
             {
-                OutilVue.Afficher(" ### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\", \"5\",ou \"6\" comme indiqué dans le menu ###");
+                OutilVue.Afficher(" ### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\", \"5\" ou \"6\" comme indiqué dans le menu ###");
                 OutilVue.Pause();
             }
 
