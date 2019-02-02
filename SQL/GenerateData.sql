@@ -3,9 +3,9 @@ use BoVoyageNN;
 --#################################################################################################################
 -- Insert Authentifications
 
-insert into Authentifications (identifiant, mdp) values ('admin', 'password');
+/*insert into Authentifications (identifiant, mdp) values ('admin', 'password');
 insert into Authentifications (identifiant, mdp) values ('client', 'voyage89');
-insert into Authentifications (identifiant, mdp) values ('marketing', 'conseil42');
+insert into Authentifications (identifiant, mdp) values ('marketing', 'conseil42');*/
 
 
 --#################################################################################################################
@@ -101,6 +101,8 @@ insert into Assurances (type_assurance, prix) values ('annulation', 14.99);
 -- Insert Dossiers
 
 insert into Dossiers (n_CB, ID_voyage, ID_client) values ('6378867045927111',9 , 2);
+insert into Dossiers (n_CB, ID_voyage, ID_client) values ('6378867045927111',4 , 15);
+--delete from Dossiers where ID_client =;
 insert into Dossiers (n_CB, ID_voyage, ID_client) values ('201925610849213',7 , 3);
 insert into Dossiers (n_CB, ID_voyage, ID_client) values ('3557430574455168',12 , 7);
 insert into Dossiers (n_CB, ID_voyage, ID_client) values ('6391593844827178',9 , 8);

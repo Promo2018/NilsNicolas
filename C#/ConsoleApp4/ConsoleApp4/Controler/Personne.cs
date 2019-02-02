@@ -98,7 +98,7 @@ namespace ConsoleApp4.Controler
             reduction = -1;
         }
 
-        // cherche une personne dans la BDD puis propose la modifier et enregistre les modifications
+        // cherche une personne dans la BDD puis propose de la modifier et enregistre les modifications
         public static void RechMod()
         {
             bool sema9 = true;
@@ -191,7 +191,7 @@ namespace ConsoleApp4.Controler
         }
 
         // recupere une personne a partir de son ID/nom/prenom et/ou ddn et la renvoie
-        public static Personne RecupPers( string action)
+        public static Personne RecupPers(string action)
         {
 
             Personne voyageur1 = new Personne();
@@ -210,7 +210,7 @@ namespace ConsoleApp4.Controler
                 Controle.CPrenom2(ref voyageur1);
                 Controle.CNom2(ref voyageur1);
                 Controle.CDDN2(ref voyageur1);
-                if (voyageur1.Id_personne == -1 && voyageur1.Prenom == null && voyageur1.nom == null && voyageur1.Datenaissance == DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture))
+                if (voyageur1.Id_personne == -1 && voyageur1.Prenom == null && voyageur1.Nom == null && voyageur1.Datenaissance == DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture))
                 {
                     OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer la saisie des critères de recherche");
                 }
@@ -285,7 +285,98 @@ namespace ConsoleApp4.Controler
             return voyageur2;
         }
 
-    }
+        public static Personne RecupPersDoss(string action)
+        {
 
+            Personne voyageur1 = new Personne();
+            Personne voyageur2 = new Personne();
+            Personne vnul = new Personne();
+            // rechercher la personen a partir de ID, nom, prenom et/ou date de naissance
+            voyageur1.Reinit();
+            bool sema10 = true;
+            while (sema10)
+            {
+                sema10 = false;
+                List<Personne> listeR = new List<Personne>();
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Prenom et Nom \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+
+                Controle.CPrenom2(ref voyageur1);
+                Controle.CNom2(ref voyageur1);
+                if (voyageur1.Prenom == null && voyageur1.Nom == null)
+                {
+                    OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer la saisie des critères de recherche");
+                }
+                // si la personne est trouvee dans la BDD l'affiche et la stoque dans un objet personne
+                else
+                {
+                    listeR = PersonneBDD.RechercherVoyageur(voyageur1);
+                    if (listeR.Count == 0)
+                    {
+                        OutilVue.Afficher("Aucun resultat trouvé");
+
+                    }
+                    else
+                    {
+                        bool sema11 = OutilVue.Precedent(action + " (un de) ce(s) voyageur");
+                        if (sema11)
+                        {
+
+                            voyageur2.Reinit();
+                            switch (listeR.Count)
+                            {
+                                case 1:
+                                    voyageur2 = listeR[0];
+                                    break;
+
+                                //si la methode rechercher retourne plusieurs resultat il faut selectionner une des personnes retournée qui est à nouveau recuperée via son ID
+                                case int n when n > 1:
+                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du voyageur à modifier");
+                                    List<int> ids = new List<int>();
+                                    foreach (Personne p in listeR)
+                                    {
+                                        ids.Add(p.Id_personne);
+                                    }
+
+                                    bool sema12 = true;
+                                    while (sema12)
+                                    {
+                                        Controle.CId(ref voyageur2);
+                                        if (ids.Contains(voyageur2.Id_personne))
+                                        {
+                                            List<Personne> listeS = PersonneBDD.RechercherVoyageur(voyageur2);
+                                            voyageur2 = listeS[0];
+                                            sema12 = false;
+                                        }
+                                        else
+                                        {
+                                            OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
+                                        }
+                                    }
+
+                                    break;
+
+                                default:
+                                    OutilVue.Afficher("Erreur switch du menu modifier voyageur");
+                                    break;
+                            }
+
+                        }
+
+                        else
+                        {
+                            sema11 = false;
+                            // OutilVue.Afficher("### Abandon de la modification d'un Voyageur ###");
+                        }
+
+                    }
+
+                }
+
+
+            }
+            return voyageur2;
+        }
+
+    }
 
 }

@@ -490,13 +490,13 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie de l'Id obligatoire
-        public static void CIdDoss(ref DossierReservation dossier1)
+        //controle de saisie de l'Id dossier obligatoire
+        public static void CIdVoy(ref DossierReservation dossier1)
         {
             bool sema8 = true;
             while (sema8)
             {
-                string saisie = OutilVue.Demander("Numero de dossier");
+                string saisie = OutilVue.Demander("Id voyage");
                 if (ZeroOuVide(saisie))
                 {
                     OutilVue.Afficher("Ce champ est obligatoire");
@@ -506,7 +506,7 @@ namespace ConsoleApp4.Controler
                     if (OnlyNumber(saisie))
                     {
                         sema8 = false;
-                        dossier1.Id_dossier = Int32.Parse(saisie);
+                        dossier1.Id_voyage = Int32.Parse(saisie);
                     }
                     else
                     {
@@ -518,13 +518,13 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie de l'Id obligatoire
-        public static void CIdClient(ref DossierReservation dossier1)
+        //controle de saisie de l'Id client obligatoire
+        public static void CIdClient2(ref DossierReservation dossier1)
         {
             bool sema8 = true;
             while (sema8)
             {
-                string saisie = OutilVue.Demander("Identifiant unique");
+                string saisie = OutilVue.Demander("Identifiant Unique");
                 if (ZeroOuVide(saisie))
                 {
                     OutilVue.Afficher("Ce champ est obligatoire");
@@ -543,6 +543,61 @@ namespace ConsoleApp4.Controler
 
                 }
             }
+
+        }
+
+        //controle de saisie de l'Id dossier pour le select
+        public static int CIdDoss(ref DossierReservation dossier1)
+        {
+            bool sema8 = true;
+            while (sema8)
+            {
+                string saisie = OutilVue.Demander("Numero de dossier");
+                if (ZeroOuVide(saisie))
+                {
+                    sema8 = false;
+                }
+                else
+                {
+                    if (OnlyNumber(saisie))
+                    {
+                        sema8 = false;
+                        dossier1.Id_dossier = Int32.Parse(saisie);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }return dossier1.Id_dossier;
+        }
+
+        //controle de saisie de l'Id client pour le seelct
+        public static int CIdClient(ref DossierReservation dossier1)
+        {
+            bool sema8 = true;
+            while (sema8)
+            {
+                string saisie = OutilVue.Demander("Identifiant unique");
+                if (ZeroOuVide(saisie))
+                {
+                    sema8 = false;
+                }
+                else
+                {
+                    if (OnlyNumber(saisie))
+                    {
+                        sema8 = false;
+                        dossier1.Id_client = Int32.Parse(saisie);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }    return dossier1.Id_client;        
 
         }
 

@@ -1,4 +1,6 @@
 ﻿using ConsoleApp4.Vue;
+using ConsoleApp4.Model;
+using ConsoleApp4.Controler;
 using System.Collections.Generic;
 
 namespace ConsoleApp4.Vue
@@ -27,7 +29,8 @@ namespace ConsoleApp4.Vue
                         break;
 
                     case "2":
-                        OutilVue.Dev("Recherche / modification des dossiers");
+                        DossierReservation.RechModDoss();
+                        //OutilVue.Dev("Recherche / modification des dossiers");
                         break;
 
                     case "3":
@@ -35,7 +38,8 @@ namespace ConsoleApp4.Vue
                         break;
 
                     case "4":
-                        OutilVue.Dev("Affichage de tout les voyageurs");
+                        DossierReservation.TousDossier();
+                        //OutilVue.Dev("Affichage de tout les dossiers");
                         break;
 
                     case "5":

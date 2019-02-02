@@ -86,103 +86,29 @@ namespace ConsoleApp4.Controler
             Id_client = -1;
         }
 
-        public static void RechMod()
+
+        // cherche un dossier dans la BDD puis propose de le modifier et enregistre les modifications
+        public static void RechModDoss()
         {
             bool sema9 = true;
-            DossierReservation doss2 = new DossierReservation();
-            DossierReservation doss3 = new DossierReservation();
+
+
             DossierReservation dnul = new DossierReservation();
-            Personne client = new Personne();
-            // rechercher un dossier a partir de ID_dossier, Id, nom et/ou prenom du client
+            // rechercher le dossier a partir de ID, nom, prenom et/ou date de naissance
             while (sema9)
             {
-                doss2.ReinitDossier();
-                bool sema10 = true;
-                while (sema10)
+                DossierReservation dossier3 = RecupDoss("modifier");
+                if (dossier3.Id_dossier == -1)
                 {
-                    sema10 = false;
-                    List<DossierReservation> listeR = new List<DossierReservation>();
-                    OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Dossier que vous souhaitez modifier : Numéro de dossier, Identifiant unique, Prenom et/ou Nom du client\n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
-
-                    Controle.CIdDoss(ref doss2);
-                    Controle.CIdClient(ref doss2);
-                    Controle.CPrenom2(ref client);
-                    Controle.CNom2(ref client);
-                    Controle.CDDN2(ref client);
-                    if (doss2 == dnul)
-                    {
-                        OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer");
-                    }
-                    // si le dossier est trouve dans la BDD l'affiche et la stocke dans un objet dossier
-                    else
-                    {
-                        listeR = DossierReservationBDD.RechercherDossier(doss2);
-                        if (listeR.Count == 0)
-                        {
-                            OutilVue.Afficher("Aucun resultat trouvé");
-
-                        }
-                        else
-                        {
-                            bool sema11 = OutilVue.Precedent("modifier (un de) ce(s) dossier(s)");
-                            if (sema11)
-                            {
-
-                                doss3.ReinitDossier();
-                                switch (listeR.Count)
-                                {
-                                    case 1:
-                                        doss3 = listeR[0];
-                                        break;
-
-                                    //si la methode rechercher retourne plusieurs resultats, il faut selectionner un des des dossiers retourné qui est à nouveau recuperé via son ID
-                                    case int n when n > 1:
-                                        OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du dossier à modifier");
-                                        List<int> ids = new List<int>();
-                                        foreach (DossierReservation d in listeR)
-                                        {
-                                            ids.Add(d.Id_dossier);
-                                        }
-
-                                        bool sema12 = true;
-                                        while (sema12)
-                                        {
-                                            Controle.CIdDoss(ref doss3);
-                                            if (ids.Contains(doss3.Id_dossier))
-                                            {
-                                                List<DossierReservation> listeS = DossierReservationBDD.RechercherDossier(doss3);
-                                                doss3 = listeS[0];
-                                                sema12 = false;
-                                            }
-                                            else
-                                            {
-                                                OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
-                                            }
-                                        }
-
-                                        break;
-
-                                    default:
-                                        OutilVue.Afficher("Erreur switch du menu modifier dossier");
-                                        break;
-                                }
-                                // une fois qu on a isolé et "uploadé" la personne on la modifie
-                                DossierReservationBDD.Update(doss3);
-
-
-                            }
-
-                            else
-                            {
-                                // OutilVue.Afficher("### Abbandon de la modification d'un Dossier ###");
-                            }
-
-                        }
-
-                    }
+                    OutilVue.Afficher("Fin de la recherche/modification.");
 
                 }
-                sema9 = OutilVue.Precedent("continuer de rechercher/modifier des Dossiers");
+                else
+                {
+                    DossierReservationBDD.UpdateDoss(dossier3);
+
+                }
+                sema9 = OutilVue.Precedent("continuer de rechercher/modifier des Voyageurs");
             }
         }
 
@@ -243,6 +169,116 @@ namespace ConsoleApp4.Controler
                 }
 
             }
+        }
+
+        // affiche la liste de tous les voyageurs
+        public static void TousDossier()
+        {
+            DossierReservation dossier1 = new DossierReservation();
+            dossier1.ReinitDossier();
+            DossierReservationBDD.RechercherDossier(dossier1);
+        }
+
+        // recupere une personne a partir de son ID/nom/prenom et/ou ddn et la renvoie
+        public static DossierReservation RecupDoss(string action)
+        {
+            
+            DossierReservation dossier1 = new DossierReservation();
+            DossierReservation dossier2 = new DossierReservation();
+            DossierReservation dnul = new DossierReservation();
+            Personne client = new Personne();
+            // rechercher le dossier a partir de ID, nom, prenom et/ou date de naissance
+            dossier1.ReinitDossier();
+            bool sema10 = true;
+            while (sema10)
+            {
+                sema10 = false;
+                List<DossierReservation> listeR = new List<DossierReservation>();
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+
+                Controle.CIdDoss(ref dossier1);
+                Controle.CIdClient(ref dossier1);
+
+                if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1)
+                {
+                    client = Personne.RecupPersDoss("recupération des données clients lié au dossier ");
+                    dossier1.Id_client = client.Id_personne;
+
+                }             
+                
+                if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1 && client.Prenom == null && client.Nom == null)
+                {
+                    OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer la saisie des critères de recherche");
+                }
+                // si la personne est trouvee dans la BDD l'affiche et la stoque dans un objet personne
+                else
+                {
+                    listeR = DossierReservationBDD.RechercherDossier(dossier1);
+                    if (listeR.Count == 0)
+                    {
+                        OutilVue.Afficher("Aucun resultat trouvé");
+
+                    }
+                    else
+                    {
+                        bool sema11 = OutilVue.Precedent(action + " (un de) ce(s) dossier");
+                        if (sema11)
+                        {
+
+                            dossier2.ReinitDossier();
+                            switch (listeR.Count)
+                            {
+                                case 1:
+                                    dossier2 = listeR[0];
+                                    break;
+
+                                //si la methode rechercher retourne plusieurs resultat il faut selectionner un des dossiers retourné qui est à nouveau recuperéevia son ID
+                                case int n when n > 1:
+                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du voyageur à modifier");
+                                    List<int> ids = new List<int>();
+                                    foreach (DossierReservation p in listeR)
+                                    {
+                                        ids.Add(p.Id_dossier);
+                                    }
+
+                                    bool sema12 = true;
+                                    while (sema12)
+                                    {
+                                        Controle.CIdDoss(ref dossier2);
+                                        if (ids.Contains(dossier2.Id_dossier))
+                                        {
+                                            List<DossierReservation> listeS = DossierReservationBDD.RechercherDossier(dossier2);
+                                            dossier2 = listeS[0];
+                                            sema12 = false;
+                                        }
+                                        else
+                                        {
+                                            OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
+                                        }
+                                    }
+
+                                    break;
+
+                                default:
+                                    OutilVue.Afficher("Erreur switch du menu modifier voyageur");
+                                    break;
+                            }
+
+                        }
+
+                        else
+                        {
+                            sema11 = false;
+                            // OutilVue.Afficher("### Abandon de la modification d'un Voyageur ###");
+                        }
+
+                    }
+
+                }
+
+
+            }
+            return dossier2;
         }
 
 

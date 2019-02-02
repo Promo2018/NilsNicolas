@@ -19,14 +19,12 @@ select * from Agences;
 select * from AssurDoss;
 select * from ParticipDoss;
 select * from Assurances;
-select * from Authentifications
 */
 
 --####################
 -- Supressions des tables :
 
 /*
-
 drop table AssurDoss;
 drop table ParticipDoss;
 drop table Dossiers;
@@ -35,19 +33,7 @@ drop table Personnes;
 drop table Voyages;
 drop table Destinations;
 drop table Agences;
-drop table Authentifications;
-
 */
-
-
---##################################
---  Création table Authentifications :
-create table Authentifications
-(
-identifiant nvarchar(10),
-mdp nvarchar(10)
-);
-
 
 --##################################
 --  Création table Destinations :
@@ -60,6 +46,7 @@ region nvarchar(32),
 descriptif nvarchar(max),
 primary key(ID_destination)
 );
+
 
 
 --##################################
@@ -86,7 +73,6 @@ ID_agence int not null
 primary key (ID_voyage)
 );
 
-
 --##################################
 --  Création table Personnes :
 create table Personnes
@@ -96,7 +82,6 @@ civ nvarchar(5),
 nom nvarchar(32) not null,
 prenom nvarchar(32) not null, 
 date_naissance Date not null,
-age int not null,
 adresse nvarchar (230),  
 tel nvarchar(20) not null,
 email nvarchar(320),
@@ -112,9 +97,8 @@ create table Dossiers
 (
 ID_dossier int not null identity,
 n_CB nvarchar(20) not null,
-prixTotal money,
-etatDossier tinyint not null,
-raisonAnnulation tinyint, 
+etatDossier nvarchar(20) NOT NULL CHECK(etatdossier IN('En attente', 'en cours', 'Refusé', 'Accepté')),
+raisonAnnulation nvarchar(20) NOT NULL CHECK(raisonAnnulation IN('Aucune', 'Client', 'Places Insufisantes')),
 ID_voyage int not null,
 ID_client int not null,
 primary key (ID_dossier)
@@ -185,7 +169,7 @@ add constraint fkPD2 foreign key (ID_dossier) references Dossiers (ID_dossier);
 --##################################
 -- Ajout de valeur par défaut:
 
-ALTER TABLE Personnes ADD CONSTRAINT age_def DEFAULT (-1) FOR age; 
-ALTER TABLE Dossiers ADD CONSTRAINT etatDoss_def DEFAULT (0) FOR etatDossier; 
+ALTER TABLE Dossiers ADD CONSTRAINT etatDoss_def DEFAULT ('En attente') FOR etatDossier; 
+ALTER TABLE Dossiers ADD CONSTRAINT raisAnnul_def DEFAULT ('Aucune') FOR raisonAnnulation; 
 
 

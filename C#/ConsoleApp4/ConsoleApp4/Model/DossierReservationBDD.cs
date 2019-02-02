@@ -146,7 +146,7 @@ namespace ConsoleApp4.Model
 
 
 
-        public static void Update(DossierReservation recup)
+        public static void UpdateDoss(DossierReservation recup)
         {
             string choix;
             bool sema2;
@@ -160,70 +160,59 @@ namespace ConsoleApp4.Model
                 do
                 {
                     OutilVue.Afficher("\r\n Veuillez indiquer le champ que vous souhaitez modifier \r\n" +
-                        "\n\t 1. Civilité  \n\t 2. Prénom  \n\t 3. Nom \n\t 4. Date de naissance \n\t 5. Adresse \n\t 6. Téléphone \n\t 7. e-mail \n\t");
+                        "\n\t 1. Numéro de carte bancaire  \n\t 2. ID  Voyage  \n\t 3. ID client \n\t 4. Liste des particpants \n\t ");
                     choix = OutilVue.Demander();
                     if (!listmenum.Contains(choix))
                     {
-                        OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\", \"5\" , \"6\" ou \"7\" comme indiqué dans le menu ###");
+                        OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\" comme indiqué dans le menu ###");
                     }
                 }
                 while (!listmenum.Contains(choix));
 
-                /* switch (choix)
+                switch (choix)
                  {
                      case "1":
-                         Controle.CCivilite(ref recup);
+                         //Controle.CCivilite(ref recup);
 
                          break;
                      case "2":
-                         Controle.CPrenom(ref recup);
+                         Controle.CIdVoy(ref recup);
                          break;
                      case "3":
-                         Controle.CNom(ref recup);
+                         Controle.CIdClient2(ref recup);
                          break;
                      case "4":
-                         Controle.CDDN(ref recup);
+                         // a faire
                          break;
-                     case "5":
-                         Controle.CAdresse(ref recup);
-                         break;
-                     case "6":
-                         Controle.CTel(ref recup);
-                         break;
-                     case "7":
-                         Controle.CEmail(ref recup);
-                         break;
+                     
 
                      default:
-                         OutilVue.Afficher("Erreur menu modifier objet Personne");
+                         OutilVue.Afficher("Erreur menu modifier objet Dossier");
                          break;
                  }
-                 OutilVue.Afficher("Modification du Voyageur ...");*/
+                 OutilVue.Afficher("Modification du dossier ...");
                 switch (choix)
                 {
                     case "1":
                         BDD.Access("update Dossiers set n_CB = '" + recup.NumCB + "' where ID_dossier = " + recup.Id_dossier + ";");
                         break;
                     case "2":
-                        BDD.Access("update Dossiers set etatDossier = " + recup.EtatDossier1 + " where ID_dossier = " + recup.Id_dossier + ";");
-                        break;
-                    case "3":
-                        BDD.Access("update Dossiers set raisonAnnulation = " + recup.RaisonAnnul + " where ID_dossier = " + recup.Id_dossier + ";");
-                        break;
-                    case "4":
                         BDD.Access("update Dossiers set ID_voyage = " + recup.Id_voyage + " where ID_dossier = " + recup.Id_dossier + ";");
                         break;
-                    case "6":
+                    case "3":
                         BDD.Access("update Dossiers set ID_client = " + recup.Id_client + " where ID_dossier = " + recup.Id_dossier + ";");
                         break;
+                    case "4":
+                        // en dev
+                        break;                    
 
                     default:
                         OutilVue.Afficher("Erreur menu update");
                         break;
                 }
-                OutilVue.Afficher("Modification du voyageur transmise au serveur");
+                OutilVue.Afficher("Modification du dossier transmise au serveur");
                 RechercherDossier(recup);
-                sema2 = OutilVue.Precedent("modifier un autre donnée de cette personne");
+                sema2 = OutilVue.Precedent("modifier une autre donnée de ce dossier");
 
 
             }
