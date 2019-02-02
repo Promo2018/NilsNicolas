@@ -204,7 +204,7 @@ namespace ConsoleApp4.Controler
             {
                 sema10 = false;
                 List<Personne> listeR = new List<Personne>();
-                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaitez modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
                 Controle.CId2(ref voyageur1);
                 Controle.CPrenom2(ref voyageur1);
@@ -285,6 +285,7 @@ namespace ConsoleApp4.Controler
             return voyageur2;
         }
 
+        // Renvoie une personne comme la methode precedente mais en vue de modifier son dossier
         public static Personne RecupPersDoss(string action)
         {
 
@@ -298,7 +299,7 @@ namespace ConsoleApp4.Controler
             {
                 sema10 = false;
                 List<Personne> listeR = new List<Personne>();
-                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Prenom et Nom \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour retrouver le Client dont vous souhaitez modifier le Dossier : Prenom et Nom \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
                 Controle.CPrenom2(ref voyageur1);
                 Controle.CNom2(ref voyageur1);
@@ -317,7 +318,7 @@ namespace ConsoleApp4.Controler
                     }
                     else
                     {
-                        bool sema11 = OutilVue.Precedent(action + " (un de) ce(s) voyageur");
+                        bool sema11 = OutilVue.Precedent(action + " (l'un de) ce(s) voyageur");
                         if (sema11)
                         {
 
@@ -330,7 +331,7 @@ namespace ConsoleApp4.Controler
 
                                 //si la methode rechercher retourne plusieurs resultat il faut selectionner une des personnes retournée qui est à nouveau recuperée via son ID
                                 case int n when n > 1:
-                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du voyageur à modifier");
+                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du client dont vous voulez consulter le dossier");
                                     List<int> ids = new List<int>();
                                     foreach (Personne p in listeR)
                                     {

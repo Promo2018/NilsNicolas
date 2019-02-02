@@ -24,7 +24,7 @@ namespace ConsoleApp4.Vue
 
             Controle.CTel(ref voyageurv);
 
-            Controle.CEmail(ref voyageurv);
+            Controle.CEmail2(ref voyageurv);
 
             PersonneVue.AfficherVoyageur(voyageurv);
 

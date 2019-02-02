@@ -1,6 +1,4 @@
-﻿using ConsoleApp4.Vue;
-using ConsoleApp4.Model;
-using ConsoleApp4.Controler;
+﻿using ConsoleApp4.Controler;
 using System.Collections.Generic;
 
 namespace ConsoleApp4.Vue
@@ -25,12 +23,12 @@ namespace ConsoleApp4.Vue
 
                     case "1":
 
+                        DossierReservation.NvoDossier();
                         OutilVue.Dev("Creation de dossier");
                         break;
 
                     case "2":
                         DossierReservation.RechModDoss();
-                        //OutilVue.Dev("Recherche / modification des dossiers");
                         break;
 
                     case "3":
@@ -39,7 +37,6 @@ namespace ConsoleApp4.Vue
 
                     case "4":
                         DossierReservation.TousDossier();
-                        //OutilVue.Dev("Affichage de tout les dossiers");
                         break;
 
                     case "5":

@@ -369,8 +369,8 @@ namespace ConsoleApp4.Controler
             }
         }
 
-        // controle pour l'adresse e-mail
-        public static void CEmail(ref Personne voyageurv)
+        // controle pour l'adresse e-mail facultatif
+        public static void CEmail2(ref Personne voyageurv)
         {
             bool sema = false;
             string motif = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
@@ -392,6 +392,31 @@ namespace ConsoleApp4.Controler
             while (!sema);
             
         }
+
+        // controle pour une adresse e-mail obligatoire
+        public static void CEmail(ref Personne voyageurv)
+        {
+            bool sema = false;
+            string motif = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+            do
+            {
+                string saisie = OutilVue.Demander("E-mail");
+
+                if (saisie != "")
+                {
+                    Match isemail = Regex.Match(saisie, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                    sema = isemail.Success;
+                    if (!sema)
+                    { OutilVue.Afficher("### Rentrer une adresse e-mail valide !!! ###"); }
+                    else { voyageurv.Email = saisie; }
+
+                }
+                else { OutilVue.Afficher("Remplir ce champ est obligatoire"); }
+            }
+            while (!sema);
+
+        }
+
         // Controle pour l'adresse
         public static void CAdresse (ref Personne voyageurv)
         {
@@ -410,7 +435,7 @@ namespace ConsoleApp4.Controler
             }
 
         }
-        //controle pour le numero de telephone
+        //controle pour le numero de telephone obligatoire
 
         public static void CTel(ref Personne voyageurv)
         {
@@ -462,7 +487,7 @@ namespace ConsoleApp4.Controler
             }
 
         }
-        //controle de saisie de l'Id obligatoire
+        //controle de saisie de l'Id personne obligatoire
         public static void CId(ref Personne voyageur1)
         {
             bool sema8 = true;
@@ -490,7 +515,7 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie de l'Id dossier obligatoire
+        //controle de saisie de l'Id voyage obligatoire
         public static void CIdVoy(ref DossierReservation dossier1)
         {
             bool sema8 = true;
@@ -518,8 +543,8 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie de l'Id client obligatoire
-        public static void CIdClient2(ref DossierReservation dossier1)
+        //controle de saisie d'un Id client facultative
+        public static void CIdClient(ref DossierReservation dossier1)
         {
             bool sema8 = true;
             while (sema8)
@@ -527,7 +552,7 @@ namespace ConsoleApp4.Controler
                 string saisie = OutilVue.Demander("Identifiant Unique");
                 if (ZeroOuVide(saisie))
                 {
-                    OutilVue.Afficher("Ce champ est obligatoire");
+                    sema8 = false;
                 }
                 else
                 {
@@ -546,8 +571,36 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie de l'Id dossier pour le select
+        //controle de saisie de l'Id dossier obligatoire
         public static int CIdDoss(ref DossierReservation dossier1)
+        {
+            bool sema8 = true;
+            while (sema8)
+            {
+                string saisie = OutilVue.Demander("Numero de dossier");
+                if (ZeroOuVide(saisie))
+                {
+                    OutilVue.Afficher("Ce champ est obligatoire");
+                }
+                else
+                {
+                    if (OnlyNumber(saisie))
+                    {
+                        sema8 = false;
+                        dossier1.Id_dossier = Int32.Parse(saisie);
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+            }
+            return dossier1.Id_dossier;
+        }
+
+        //controle de saisie de l'Id dossier pour le select
+        public static int CIdDoss2(ref DossierReservation dossier1)
         {
             bool sema8 = true;
             while (sema8)
@@ -573,8 +626,8 @@ namespace ConsoleApp4.Controler
             }return dossier1.Id_dossier;
         }
 
-        //controle de saisie de l'Id client pour le seelct
-        public static int CIdClient(ref DossierReservation dossier1)
+        //controle de saisie de l'Id client obligatoire
+        public static int CIdClient2(ref DossierReservation dossier1)
         {
             bool sema8 = true;
             while (sema8)
@@ -601,13 +654,56 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //double la ' pour les parametre à mettre dans les requetes
-        public static void doublecote(ref string saisie)
+        //methode qui demande un numéro de CB et retourne un numéro valide ou rien
+        public static string DCB()
         {
+            string ncb;
+            bool sema = false;
+            string motif = @"^([4]{1})([0 - 9]{12,15})$";
+            do
+            {
+                ncb = OutilVue.Demander("Numero de Carte Bancaire");
 
+                if (ncb != "")
+                {
+                    Match isncb = Regex.Match(ncb, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                    sema = isncb.Success;
+                    if (!sema)
+                    { OutilVue.Afficher("### Rentrer une adresse e-mail valide !!! ###"); }
+                    else
+                    {
+
+                    }
+
+                }
+                else { }
+            }
+            while (!sema);
+
+            return ncb;
         }
 
+        // demande un numero de CB obligatoire et le rentre dans les parametres d un dossier
+        public static void CCB(ref DossierReservation dossier)
+        {
+            string ncb = DCB();
+            if (ZeroOuVide(ncb))
+            {
+                OutilVue.Afficher("Saisie du Numero de Carte Bancaire Obligatoire");
+            }
+            else
+            {
+                dossier.NumCB = ncb;
+
+            }
+        }
+
+
+
     }
+
+
+}
 
 }
 

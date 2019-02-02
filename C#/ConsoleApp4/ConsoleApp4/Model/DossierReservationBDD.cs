@@ -156,15 +156,15 @@ namespace ConsoleApp4.Model
             do
             {
 
-                List<string> listmenum = new List<string>() { "1", "2", "3", "4", "5", "6", "7" };
+                List<string> listmenum = new List<string>() { "1", "2", "3" };
                 do
                 {
                     OutilVue.Afficher("\r\n Veuillez indiquer le champ que vous souhaitez modifier \r\n" +
-                        "\n\t 1. Numéro de carte bancaire  \n\t 2. ID  Voyage  \n\t 3. ID client \n\t 4. Liste des particpants \n\t ");
+                        "\n\t 1. Numéro de carte bancaire  \n\t 2. ID  Voyage  \n\t 3. ID client");
                     choix = OutilVue.Demander();
                     if (!listmenum.Contains(choix))
                     {
-                        OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\" comme indiqué dans le menu ###");
+                        OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\" ou \"3\" comme indiqué dans le menu ###");
                     }
                 }
                 while (!listmenum.Contains(choix));
@@ -172,17 +172,13 @@ namespace ConsoleApp4.Model
                 switch (choix)
                  {
                      case "1":
-                         //Controle.CCivilite(ref recup);
-
+                         Controle.CCB(ref recup);
                          break;
                      case "2":
                          Controle.CIdVoy(ref recup);
                          break;
                      case "3":
-                         Controle.CIdClient2(ref recup);
-                         break;
-                     case "4":
-                         // a faire
+                         Controle.CIdClient(ref recup);
                          break;
                      
 
@@ -202,9 +198,7 @@ namespace ConsoleApp4.Model
                     case "3":
                         BDD.Access("update Dossiers set ID_client = " + recup.Id_client + " where ID_dossier = " + recup.Id_dossier + ";");
                         break;
-                    case "4":
-                        // en dev
-                        break;                    
+                  
 
                     default:
                         OutilVue.Afficher("Erreur menu update");

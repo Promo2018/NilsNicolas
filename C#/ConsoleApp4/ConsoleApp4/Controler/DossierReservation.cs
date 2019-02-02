@@ -1,10 +1,6 @@
 ﻿using ConsoleApp4.Vue;
 using ConsoleApp4.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp4.Controler
 {
@@ -91,7 +87,7 @@ namespace ConsoleApp4.Controler
         public static void RechModDoss()
         {
             bool sema9 = true;
-
+            Personne client = new Personne();
 
             DossierReservation dnul = new DossierReservation();
             // rechercher le dossier a partir de ID, nom, prenom et/ou date de naissance
@@ -105,15 +101,33 @@ namespace ConsoleApp4.Controler
                 }
                 else
                 {
+                    bool sema1 = OutilVue.Precedent("afficher/modifier le client lié à ce dossier");
+                    if (sema1)
+                    {
+                        client.Reinit();client.Id_personne = dossier3.Id_client; PersonneVue.AfficherVoyageur(client);
+                    }
+                    sema1 = OutilVue.Precedent("afficher/modifier la liste des particpants de ce dossier");
+                    if (sema1)
+                    {
+                        //DEV !!!!
+                        OutilVue.Dev("Afficher/modifier la/les Assurance(s) de ce dossier");
+                    }
+                    sema1 = OutilVue.Precedent("afficher/modifier la/les assurances de ce dossier");
+                    if (sema1)
+                    {
+                        //DEV !!!!
+                        OutilVue.Dev("afficher/modifier Le Voyage de ce dossier");
+                    }
+
                     DossierReservationBDD.UpdateDoss(dossier3);
 
                 }
-                sema9 = OutilVue.Precedent("continuer de rechercher/modifier des Voyageurs");
+                sema9 = OutilVue.Precedent("continuer de rechercher/modifier des Dossiers");
             }
         }
 
         // cree un objet Dossier, demande a l'utilisateur de setter ses attributs settables, offre la possibilité de modifier cet objet puis l'enregistrer dans la BDD
-        public static void Nvo()
+        public static void NvoDossier()
         {
             //cree un objet Dossier
             DossierReservation dossier1 = new DossierReservation();
@@ -171,7 +185,10 @@ namespace ConsoleApp4.Controler
             }
         }
 
-        // affiche la liste de tous les voyageurs
+
+
+
+        // affiche la liste de tous les dossiers
         public static void TousDossier()
         {
             DossierReservation dossier1 = new DossierReservation();
@@ -179,15 +196,15 @@ namespace ConsoleApp4.Controler
             DossierReservationBDD.RechercherDossier(dossier1);
         }
 
-        // recupere une personne a partir de son ID/nom/prenom et/ou ddn et la renvoie
+        // recupere un dossier a partir de son ID ou son client(ID/nom/prenom) et la renvoie
         public static DossierReservation RecupDoss(string action)
         {
-            
+
             DossierReservation dossier1 = new DossierReservation();
             DossierReservation dossier2 = new DossierReservation();
             DossierReservation dnul = new DossierReservation();
             Personne client = new Personne();
-            // rechercher le dossier a partir de ID, nom, prenom et/ou date de naissance
+            // rechercher le dossier a partir de ID dossier, ID client,  (nom, prenom et/ou date de naissance)client
             dossier1.ReinitDossier();
             bool sema10 = true;
             while (sema10)
@@ -196,17 +213,17 @@ namespace ConsoleApp4.Controler
                 List<DossierReservation> listeR = new List<DossierReservation>();
                 OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
-                Controle.CIdDoss(ref dossier1);
-                Controle.CIdClient(ref dossier1);
+                Controle.CIdDoss2(ref dossier1);
+                Controle.CIdClient2(ref dossier1);
 
                 if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1)
                 {
-                    client = Personne.RecupPersDoss("recupération des données clients lié au dossier ");
+                    client = Personne.RecupPersDoss("Selectionner le(s) dossier(s) de ");
                     dossier1.Id_client = client.Id_personne;
 
-                }             
-                
-                if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1 && client.Prenom == null && client.Nom == null)
+                }
+
+                if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1)
                 {
                     OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer la saisie des critères de recherche");
                 }
@@ -216,7 +233,7 @@ namespace ConsoleApp4.Controler
                     listeR = DossierReservationBDD.RechercherDossier(dossier1);
                     if (listeR.Count == 0)
                     {
-                        OutilVue.Afficher("Aucun resultat trouvé");
+                        OutilVue.Afficher("Aucun Dossier trouvé");
 
                     }
                     else
@@ -234,7 +251,7 @@ namespace ConsoleApp4.Controler
 
                                 //si la methode rechercher retourne plusieurs resultat il faut selectionner un des dossiers retourné qui est à nouveau recuperéevia son ID
                                 case int n when n > 1:
-                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du voyageur à modifier");
+                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez le numero du dossier à modifier");
                                     List<int> ids = new List<int>();
                                     foreach (DossierReservation p in listeR)
                                     {
