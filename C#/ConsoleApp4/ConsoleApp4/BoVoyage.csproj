@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controler\Agence.cs" />
+    <Compile Include="Controler\Connexion.cs" />
     <Compile Include="Controler\Controle.cs" />
     <Compile Include="Controler\Personne.cs" />
     <Compile Include="Controler\Voyage.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Model\DossierReservationBDD.cs" />
     <Compile Include="Model\PersonneBDD.cs" />
     <Compile Include="Model\VoyageBDD.cs" />
+    <Compile Include="Vue\ConnexionVue.cs" />
     <Compile Include="Vue\DestinationVue.cs" />
     <Compile Include="Vue\DossierReservationVue.cs" />
     <Compile Include="Vue\MenuVoyageur.cs" />

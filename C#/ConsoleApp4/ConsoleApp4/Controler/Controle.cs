@@ -24,7 +24,7 @@ namespace ConsoleApp4.Controler
             return ok;
         }
 
-        //retourne vrai si tout les caractere d'une saisie sont des lettres
+        //retourne vrai si tout les caracteres d'une saisie sont des lettres
         public static bool Onlyletters(string saisie)
         {
             bool retour = true;
@@ -36,14 +36,14 @@ namespace ConsoleApp4.Controler
                 if (Char.IsLetter(c) == false)
                 {
                     retour = false;
-                    OutilVue.Afficher("Le mot que vous avez rentré contient un chiffre ou un caractere inabituel en position " + position);
+                    OutilVue.Afficher("Le mot que vous avez rentré contient un chiffre ou un caractere inhabituel en position " + position);
                 }
                 else { }
             }
             return retour;
         }
 
-        //retourne vrai si la chaine de charactere est numérique
+        //retourne vrai si la chaine de caracteres est numérique
         public static bool OnlyNumber(string saisie)
         {
             bool retour = Int32.TryParse(saisie, out int chiffre);
@@ -66,13 +66,13 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //verifie le nombre de chacteres d'une saisie
+        //verifie le nombre de caracteres d'une saisie
         public static bool Size(string saisie, int taille)
         {
             bool retour = (saisie.Length == taille);
             return retour;
         }
-        //verifie si l'entree correspond bien a une date MMJJAAAA en 8 chiffre et dans le futur (>ajd'hui)
+        //verifie si l'entree correspond bien a une date MMJJAAAA en 8 chiffre et dans le futur (>aujourd'hui)
         public static bool Date(string saisie, out DateTime datesortie)
         {
             datesortie = DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture);
@@ -96,7 +96,7 @@ namespace ConsoleApp4.Controler
                 }
                 catch
                 {
-                    OutilVue.Afficher("Cette entrée ne corresponds pas à une date qui existe");
+                    OutilVue.Afficher("Cette entrée ne correspond pas à une date qui existe");
 
                 }
             }
@@ -383,7 +383,7 @@ namespace ConsoleApp4.Controler
                     Match isemail = Regex.Match(saisie, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                     sema = isemail.Success;
                     if (!sema)
-                    { OutilVue.Afficher("### Rentrer une adresse e-mail valide !!! ###"); }
+                    { OutilVue.Afficher("### Rentrez une adresse e-mail valide !!! ###"); }
                     else { voyageurv.Email = saisie; }
 
                 }
@@ -407,7 +407,7 @@ namespace ConsoleApp4.Controler
                     Match isemail = Regex.Match(saisie, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                     sema = isemail.Success;
                     if (!sema)
-                    { OutilVue.Afficher("### Rentrer une adresse e-mail valide !!! ###"); }
+                    { OutilVue.Afficher("### Rentrez une adresse e-mail valide !!! ###"); }
                     else { voyageurv.Email = saisie; }
 
                 }
@@ -428,7 +428,7 @@ namespace ConsoleApp4.Controler
 
                 if (ZeroOuVide(saisie) | OnlyNumber(saisie))
                 {
-                    OutilVue.Afficher("Erreur saisie adresse. Renseigner une adresse svp");
+                    OutilVue.Afficher("Erreur saisie adresse. Renseignez une adresse svp");
                 }
                 else { sema = false; voyageurv.Adresse = saisie; }
                 
@@ -450,7 +450,7 @@ namespace ConsoleApp4.Controler
                     Match istel = Regex.Match(saisie, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                     sema = istel.Success;
                     if (!sema)
-                    { OutilVue.Afficher("### Rentrer un numero de telephone valide !!! ###"); }
+                    { OutilVue.Afficher("### Rentrez un numero de telephone valide !!! ###"); }
                     else { voyageurv.Tel = saisie; }
 
                 }
@@ -487,6 +487,7 @@ namespace ConsoleApp4.Controler
             }
 
         }
+
         //controle de saisie de l'Id personne obligatoire
         public static void CId(ref Personne voyageur1)
         {
@@ -521,7 +522,7 @@ namespace ConsoleApp4.Controler
             bool sema8 = true;
             while (sema8)
             {
-                string saisie = OutilVue.Demander("Id voyage");
+                string saisie = OutilVue.Demander("Id Voyage");
                 if (ZeroOuVide(saisie))
                 {
                     OutilVue.Afficher("Ce champ est obligatoire");
@@ -543,7 +544,7 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie d'un Id client facultative
+        //controle de saisie d'un Id client facultatif
         public static void CIdClient(ref DossierReservation dossier1)
         {
             bool sema8 = true;
@@ -669,7 +670,7 @@ namespace ConsoleApp4.Controler
                     Match isncb = Regex.Match(ncb, motif, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                     sema = isncb.Success;
                     if (!sema)
-                    { OutilVue.Afficher("### Rentrer une adresse e-mail valide !!! ###"); }
+                    { OutilVue.Afficher("### Rentrez un numero de carte bancaire valide !!! ###"); }
                     else
                     {
 
@@ -705,6 +706,6 @@ namespace ConsoleApp4.Controler
 
 }
 
-}
+
 
 

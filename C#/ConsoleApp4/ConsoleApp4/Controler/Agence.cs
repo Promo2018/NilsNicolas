@@ -8,6 +8,11 @@ namespace ConsoleApp4.Controler
 {
     class Agence
     {
+        public Agence()
+        {
+
+        }
+
         private int id_agence;
         private string nomAgence;
 

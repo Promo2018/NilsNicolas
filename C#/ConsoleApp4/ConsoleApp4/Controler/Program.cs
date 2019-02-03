@@ -8,7 +8,8 @@ namespace ConsoleApp4.Controler
     {
         static void Main(string[] args)
         {
-            MenuP acceuil = new MenuP();
+            ConnexionVue.Authentification();
+            
            
             OutilVue.Quitter();
             

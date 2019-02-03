@@ -12,6 +12,7 @@ namespace ConsoleApp4.Controller
         {
 
         }
+
         private int id_assurance;
         private string type_asssurance;
         private float prix;
