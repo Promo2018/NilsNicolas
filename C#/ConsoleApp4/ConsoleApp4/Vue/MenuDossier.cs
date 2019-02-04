@@ -24,7 +24,6 @@ namespace ConsoleApp4.Vue
                     case "1":
 
                         DossierReservation.NvoDossier();
-                        OutilVue.Dev("Creation de dossier");
                         break;
 
                     case "2":

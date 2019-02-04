@@ -181,6 +181,99 @@ namespace ConsoleApp4.Model
             while (sema2);
         }
 
+        //meme methode mais pour MAJ un seul attribut prédéfini
+
+        public static void Update(Personne recup, string numero)
+        {
+            List<string> listmenum = new List<string>() { "1", "2", "3", "4", "5", "6", "7" };
+            string choix;
+            bool sema2;
+            AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
+            BDD.ConnectBDD();
+            //modifier l'objet personne
+            do
+            {
+
+                
+                do
+                {
+
+                    choix = numero;
+                    if (!listmenum.Contains(choix))
+                    {
+                        OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\", \"3\", \"4\", \"5\" , \"6\" ou \"7\" comme indiqué dans le menu ###");
+                    }
+                }
+                while (!listmenum.Contains(choix));
+
+                switch (choix)
+                {
+                    case "1":
+                        Controle.CCivilite(ref recup);
+
+                        break;
+                    case "2":
+                        Controle.CPrenom(ref recup);
+                        break;
+                    case "3":
+                        Controle.CNom(ref recup);
+                        break;
+                    case "4":
+                        Controle.CDDN(ref recup);
+                        break;
+                    case "5":
+                        Controle.CAdresse(ref recup);
+                        break;
+                    case "6":
+                        Controle.CTel(ref recup);
+                        break;
+                    case "7":
+                        Controle.CEmail(ref recup);
+                        break;
+
+                    default:
+                        OutilVue.Afficher("Erreur menu modifier objet Personne");
+                        break;
+                }
+                // requete d update
+                OutilVue.Afficher("Modification du Voyageur ...");
+                switch (choix)
+                {
+                    case "1":
+                        BDD.Access("update Personnes set civ = '" + recup.Civ + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "2":
+                        BDD.Access("update Personnes set prenom = '" + recup.Prenom.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "3":
+                        BDD.Access("update Personnes set nom = '" + recup.Nom.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "4":
+                        BDD.Access("update Personnes set date_naissance = '" + recup.Datenaissance.ToString() + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "5":
+                        BDD.Access("update Personnes set adresse = '" + recup.Adresse.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "6":
+                        BDD.Access("update Personnes set tel = '" + recup.Tel + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+                    case "7":
+                        BDD.Access("update Personnes set email = '" + recup.Email.Replace("'", "''") + "' where ID_personne = " + recup.Id_personne + ";");
+                        break;
+
+                    default:
+                        OutilVue.Afficher("Erreur menu update");
+                        break;
+                }
+                OutilVue.Afficher("Modification du voyageur transmise au serveur");
+                RechercherVoyageur(recup);
+                sema2 = OutilVue.Precedent("modifier un autre donnée de cette personne");
+
+
+            }
+            while (sema2);
+        }
+
     }
 
 }

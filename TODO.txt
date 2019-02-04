@@ -1,0 +1,42 @@
+à faire
+
+-séparer true/false de la saisie dans les controles
+-quand on affiche un voyage tout apparait (constructeur de dossier+ADO)
+- afficher
+	-assurance
+	-listes participants
+	-voyage
+		-destination
+		-agence
+	
+
+-creer 
+	-assurance
+	-listes participants
+	-voyage
+		-destination
+		-agences
+	-login
+
+-modifier 
+	-assurance
+	-listes participants
+	-voyage
+		-destination
+		-agences
+	-login
+
+
+quand on saisit un ID toujours proposer de retrouver cet ID autrement :
+	- modifier CIDclient et CIDClient2 pour pouvoir retouver l'ID en utilisant le nom et le prenom
+	- modifier CIDVoyage pour pouvoir utiliser les dates (et la destination?)
+	- faire CIDdestination pour pouvoir utiliser Continent, Region, Pays  
+
+Ajouter de proposer la création d un client au niveau de la création d'un voyage ("1 . créer un nouveau client pour ce dossier ou 2.utiliser un client dans la BDD?")
+	-idem dans le future pour voyage, (liste de participants uniquement de cette maniere)
+
+faire un champs avec une contrainte d'unicité pour chaque table et l'intégrer dans le programme pour eviter les doublons.
+
+faire une table connexion et la relier au login
+	faire une menu pour creer/ajouter/modifier des logins
+	faire une menu different pour les logins administrateur(login)/clientelle(voyageur/dossier)/marketing(assurance/voyage/destination)

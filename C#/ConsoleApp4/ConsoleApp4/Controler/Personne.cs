@@ -108,7 +108,7 @@ namespace ConsoleApp4.Controler
             // rechercher la personen a partir de ID, nom, prenom et/ou date de naissance
             while (sema9)
             {
-                Personne voyageur3 = RecupPers("Voulez vous modifier");
+                Personne voyageur3 = RecupPers("rechercher/modifier");
                 if (voyageur3.Id_personne==-1)
                 {
                     OutilVue.Afficher("Fin de la recherche/modification.");
@@ -204,7 +204,7 @@ namespace ConsoleApp4.Controler
             {
                 sema10 = false;
                 List<Personne> listeR = new List<Personne>();
-                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaitez modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaitez "+action+" : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
                 Controle.CId2(ref voyageur1);
                 Controle.CPrenom2(ref voyageur1);
@@ -257,7 +257,7 @@ namespace ConsoleApp4.Controler
                                         }
                                         else
                                         {
-                                            OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
+                                            OutilVue.Afficher("### Entrez l'identifiant de l'un des resultats de la recherche svp ###");
                                         }
                                     }
 
@@ -291,7 +291,7 @@ namespace ConsoleApp4.Controler
 
             Personne voyageur1 = new Personne();
             Personne voyageur2 = new Personne();
-            Personne vnul = new Personne();
+
             // rechercher la personen a partir de ID, nom, prenom et/ou date de naissance
             voyageur1.Reinit();
             bool sema10 = true;
@@ -299,11 +299,13 @@ namespace ConsoleApp4.Controler
             {
                 sema10 = false;
                 List<Personne> listeR = new List<Personne>();
-                OutilVue.Afficher("Veuillez saisir les informations suivantes pour retrouver le Client dont vous souhaitez modifier le Dossier : Prenom et Nom \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour retrouver le Client que vous souhaitez "+action+" : Prenom, Nom et/ou date de naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
+                Controle.CId2(ref voyageur1);
                 Controle.CPrenom2(ref voyageur1);
                 Controle.CNom2(ref voyageur1);
-                if (voyageur1.Prenom == null && voyageur1.Nom == null)
+                Controle.CDDN2(ref voyageur1);
+                if (voyageur1.Id_personne == -1 && voyageur1.Prenom == null && voyageur1.Nom == null && voyageur1.Datenaissance == DateTime.ParseExact("01010001", "ddMMyyyy", CultureInfo.InvariantCulture))
                 {
                     OutilVue.Afficher("Aucun critère de selection appliqué"); sema10 = OutilVue.Precedent("recommencer la saisie des critères de recherche");
                 }
@@ -331,7 +333,7 @@ namespace ConsoleApp4.Controler
 
                                 //si la methode rechercher retourne plusieurs resultat il faut selectionner une des personnes retournée qui est à nouveau recuperée via son ID
                                 case int n when n > 1:
-                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez l'identifiant unique du client dont vous voulez consulter le dossier");
+                                    OutilVue.Afficher(listeR.Count + " resultats trouvés. Saisissez l'identifiant unique du client que vous voulez"+action);
                                     List<int> ids = new List<int>();
                                     foreach (Personne p in listeR)
                                     {
@@ -350,14 +352,14 @@ namespace ConsoleApp4.Controler
                                         }
                                         else
                                         {
-                                            OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
+                                            OutilVue.Afficher("### Entrez l'identifiant de l'un des resultats de la recherche svp ###");
                                         }
                                     }
 
                                     break;
 
                                 default:
-                                    OutilVue.Afficher("Erreur switch du menu modifier voyageur");
+                                    OutilVue.Afficher("Erreur switch du menu recuperer voyageur");
                                     break;
                             }
 
@@ -366,7 +368,7 @@ namespace ConsoleApp4.Controler
                         else
                         {
                             sema11 = false;
-                            // OutilVue.Afficher("### Abandon de la modification d'un Voyageur ###");
+
                         }
 
                     }

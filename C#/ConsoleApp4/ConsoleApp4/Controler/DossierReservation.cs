@@ -89,7 +89,7 @@ namespace ConsoleApp4.Controler
             bool sema9 = true;
             Personne client = new Personne();
 
-            DossierReservation dnul = new DossierReservation();
+            
             // rechercher le dossier a partir de ID, nom, prenom et/ou date de naissance
             while (sema9)
             {
@@ -101,25 +101,58 @@ namespace ConsoleApp4.Controler
                 }
                 else
                 {
+                    //modif client
                     bool sema1 = OutilVue.Precedent("afficher/modifier le client lié à ce dossier");
                     if (sema1)
                     {
-                        client.Reinit();client.Id_personne = dossier3.Id_client; PersonneVue.AfficherVoyageur(client);
+                        client.Reinit();client.Id_personne = dossier3.Id_client; PersonneBDD.RechercherVoyageur(client);
+                        bool sema2 = OutilVue.Precedent("Modifier le client lié à ce dossier");
+                        if (sema2)
+                        {
+                            DossierReservation.SetClient(ref dossier3);
+                            DossierReservationBDD.UpdateDoss(dossier3, "3");
+                        }
+                        else
+                        { }
+
                     }
+                    //modif CB
+                    sema1 = OutilVue.Precedent("afficher/modifier la carte bancaire liée à ce dossier");
+                    if (sema1)
+                    {
+                        OutilVue.Afficher(dossier3.NumCB);
+                        bool sema2 = OutilVue.Precedent("Modifier le numero de CB lié à ce dossier");
+                        if (sema2)
+                        { Controle.CCB(ref dossier3); DossierReservationBDD.UpdateDoss(dossier3, "1"); }
+                        else
+                        { }
+                    }
+
+                    // modif voyage
+                    sema1 = OutilVue.Precedent("afficher/modifier le voyage lié à ce dossier");
+                    if (sema1)
+                    {
+                        VoyageBDD.RechercherVoyage(dossier3);
+                        DossierReservation.SetVoyage(ref dossier3);
+                        DossierReservationBDD.UpdateDoss(dossier3, "2");
+                    }
+
+                    // modif liste participants
                     sema1 = OutilVue.Precedent("afficher/modifier la liste des particpants de ce dossier");
                     if (sema1)
                     {
                         //DEV !!!!
-                        OutilVue.Dev("Afficher/modifier la/les Assurance(s) de ce dossier");
-                    }
-                    sema1 = OutilVue.Precedent("afficher/modifier la/les assurances de ce dossier");
-                    if (sema1)
-                    {
-                        //DEV !!!!
-                        OutilVue.Dev("afficher/modifier Le Voyage de ce dossier");
+                        OutilVue.Dev("Afficher/modifier le(s) participant(s) de ce dossier");
                     }
 
-                    DossierReservationBDD.UpdateDoss(dossier3);
+                    // modif assurance
+
+                    sema1 = OutilVue.Precedent("afficher/modifier la/les assurances de ce dossier");
+                     if (sema1)
+                    {
+                        //DEV !!!!
+                        OutilVue.Dev("Afficher/modifier la/les Assurance(s) de ce dossier");
+                    }
 
                 }
                 sema9 = OutilVue.Precedent("continuer de rechercher/modifier des Dossiers");
@@ -154,7 +187,7 @@ namespace ConsoleApp4.Controler
 
                         case "2":
                             //modifier l'objet 
-                            //DossierReservationVue.Modifier(ref dossier1);
+                            DossierReservationVue.ModifierDoss(ref dossier1);
 
                             break;
                         case "3":
@@ -202,7 +235,6 @@ namespace ConsoleApp4.Controler
 
             DossierReservation dossier1 = new DossierReservation();
             DossierReservation dossier2 = new DossierReservation();
-            DossierReservation dnul = new DossierReservation();
             Personne client = new Personne();
             // rechercher le dossier a partir de ID dossier, ID client,  (nom, prenom et/ou date de naissance)client
             dossier1.ReinitDossier();
@@ -211,14 +243,13 @@ namespace ConsoleApp4.Controler
             {
                 sema10 = false;
                 List<DossierReservation> listeR = new List<DossierReservation>();
-                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Voyageur que vous souhaiter modifier : Identifiant Unique, Prenom, Nom et Date de Naissance \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
+                OutilVue.Afficher("Veuillez saisir les informations suivantes pour trouver le Dossier que vous souhaitez consulter/modifier : numéro de dossier ou informations client : Identifiant Unique Client ou son Prenom et son Nom \n\n\t La saisie d'un champ doit être complète et exacte pour fonctionner. Mais pas Besoin de remplir tout les champs. Un champ peut rester vide. \n ");
 
                 Controle.CIdDoss2(ref dossier1);
-                Controle.CIdClient2(ref dossier1);
 
-                if (dossier1.Id_dossier == -1 && dossier1.Id_client == -1)
+                if (dossier1.Id_dossier == -1)
                 {
-                    client = Personne.RecupPersDoss("Selectionner le(s) dossier(s) de ");
+                    client = Personne.RecupPersDoss("selectionner");
                     dossier1.Id_client = client.Id_personne;
 
                 }
@@ -249,7 +280,7 @@ namespace ConsoleApp4.Controler
                                     dossier2 = listeR[0];
                                     break;
 
-                                //si la methode rechercher retourne plusieurs resultat il faut selectionner un des dossiers retourné qui est à nouveau recuperéevia son ID
+                                //si la methode rechercher retourne plusieurs resultat il faut selectionner un des dossiers retourné qui est à nouveau recuperée via son ID
                                 case int n when n > 1:
                                     OutilVue.Afficher(listeR.Count + " resultats trouvés. Selectionnez le numero du dossier à modifier");
                                     List<int> ids = new List<int>();
@@ -270,7 +301,7 @@ namespace ConsoleApp4.Controler
                                         }
                                         else
                                         {
-                                            OutilVue.Afficher("### Entrez l'identifiants de l'un des resultats de la recherche svp ###");
+                                            OutilVue.Afficher("### Entrez l'identifiant de l'un des resultats de la recherche svp ###");
                                         }
                                     }
 
@@ -298,6 +329,48 @@ namespace ConsoleApp4.Controler
             return dossier2;
         }
 
+        public static void SetClient(ref DossierReservation dossierc)
+        {
 
+                Personne clientc = Personne.RecupPersDoss("selectionner");
+                bool sema = true;
+                while (sema)
+                {
+                    if (clientc.Id_personne != -1)
+                    {
+                        sema = false;
+
+                        //email client si la personne n est pas encore un client
+                        while (clientc.Email == null)
+                        {
+                            OutilVue.Afficher("Un client doit avoir une adresse e-mail. Merci de mettre à jour ce champ pour cette personne");
+                            PersonneBDD.Update(clientc, "7");
+                            List<Personne> clientcs = PersonneBDD.RechercherVoyageur(clientc);
+                            clientc = clientcs[0];
+                        }
+
+                        dossierc.Id_client = clientc.Id_personne;
+
+                    }
+                    else
+                    {
+                        OutilVue.Afficher("Vous devez selectionner un client");
+                    }
+                }
+            
+        }
+
+        //impose de choisir une ID voyage et l'ajoute au dossier
+        public static void SetVoyage(ref DossierReservation dossier)
+        {
+            bool sema2 = true;
+            while (sema2)
+            {
+                OutilVue.Afficher("ID Voyage :");
+                Controle.CIdVoy(ref dossier);
+                List<Voyage> Voyages = VoyageBDD.RechercherVoyage(dossier);
+                sema2 = !OutilVue.Precedent("selectionner ce voyage");
+            }
+        }
     }
 }

@@ -1,3 +1,5 @@
+use BoVoyageNN;
+
 select * from Personnes;
 select * from Dossiers;
 select * from Voyages;

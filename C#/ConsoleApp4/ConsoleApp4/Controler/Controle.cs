@@ -544,7 +544,7 @@ namespace ConsoleApp4.Controler
 
         }
 
-        //controle de saisie d'un Id client facultatif
+        //controle de saisie d'un Id client obligatoire
         public static void CIdClient(ref DossierReservation dossier1)
         {
             bool sema8 = true;
@@ -553,7 +553,7 @@ namespace ConsoleApp4.Controler
                 string saisie = OutilVue.Demander("Identifiant Unique");
                 if (ZeroOuVide(saisie))
                 {
-                    sema8 = false;
+                    OutilVue.Afficher("Ce champ est obligatoire");
                 }
                 else
                 {
@@ -627,7 +627,7 @@ namespace ConsoleApp4.Controler
             }return dossier1.Id_dossier;
         }
 
-        //controle de saisie de l'Id client obligatoire
+        //controle de saisie de l'Id client facultatif
         public static int CIdClient2(ref DossierReservation dossier1)
         {
             bool sema8 = true;
@@ -660,7 +660,7 @@ namespace ConsoleApp4.Controler
         {
             string ncb;
             bool sema = false;
-            string motif = @"^([4]{1})([0 - 9]{12,15})$";
+            string motif = @"^([4]{1})([0-9]{12,15})$";
             do
             {
                 ncb = OutilVue.Demander("Numero de Carte Bancaire");

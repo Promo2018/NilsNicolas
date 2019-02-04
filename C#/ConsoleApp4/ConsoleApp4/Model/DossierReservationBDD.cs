@@ -146,22 +146,20 @@ namespace ConsoleApp4.Model
 
 
 
-        public static void UpdateDoss(DossierReservation recup)
+        public static void UpdateDoss(DossierReservation recup, string choix)
         {
-            string choix;
+            
             bool sema2;
             AccesBase BDD = new AccesBase("localhost", "BoVoyageNN");
             BDD.ConnectBDD();
 
-            do
-            {
 
                 List<string> listmenum = new List<string>() { "1", "2", "3" };
                 do
                 {
-                    OutilVue.Afficher("\r\n Veuillez indiquer le champ que vous souhaitez modifier \r\n" +
+                  /*  OutilVue.Afficher("\r\n Veuillez indiquer le champ que vous souhaitez modifier \r\n" +
                         "\n\t 1. Numéro de carte bancaire  \n\t 2. ID  Voyage  \n\t 3. ID client");
-                    choix = OutilVue.Demander();
+                    choix = OutilVue.Demander(); */
                     if (!listmenum.Contains(choix))
                     {
                         OutilVue.Afficher("### Entree Invalide; Veuillez Saisir \"1\", \"2\" ou \"3\" comme indiqué dans le menu ###");
@@ -169,7 +167,7 @@ namespace ConsoleApp4.Model
                 }
                 while (!listmenum.Contains(choix));
 
-                switch (choix)
+                /*switch (choix)
                  {
                      case "1":
                          Controle.CCB(ref recup);
@@ -185,7 +183,7 @@ namespace ConsoleApp4.Model
                      default:
                          OutilVue.Afficher("Erreur menu modifier objet Dossier");
                          break;
-                 }
+                 }*/
                  OutilVue.Afficher("Modification du dossier ...");
                 switch (choix)
                 {
@@ -208,9 +206,6 @@ namespace ConsoleApp4.Model
                 RechercherDossier(recup);
                 sema2 = OutilVue.Precedent("modifier une autre donnée de ce dossier");
 
-
-            }
-            while (sema2);
         }
     }
 }

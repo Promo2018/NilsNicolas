@@ -19,11 +19,6 @@ namespace ConsoleApp4.Vue
         //constructeur
         public MenuP()
         {
-            //Message D'acceuil
-            OutilVue.Sep(6); OutilVue.Sep(6);
-            Console.WriteLine("Bonjour Bienvenue dans BoVoyage \"Intranet \"");
-            OutilVue.Sep(6); OutilVue.Sep(6);
-            OutilVue.Pause();
 
             //semaphore de sortie de boucle menu principal
             bool sema1 = true;
@@ -80,7 +75,6 @@ namespace ConsoleApp4.Vue
                 else
                 {
                     OutilVue.Afficher("Entree Invalide; Veuillez Saisir \"1\", \"2\" ou \"3\" comme indiqué dans le menu");
-                    OutilVue.Pause();
                 }
                 OutilVue.Afficher("\n\n*****Menu Principal*****");
             }

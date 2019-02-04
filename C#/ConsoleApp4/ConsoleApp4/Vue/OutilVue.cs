@@ -76,7 +76,7 @@ namespace ConsoleApp4.Vue
             OutilVue.Pause();
             Environment.Exit(0);
         }
-        //methode qui renvoie "true" si l'utilisateur veut repeter la meme opération "false" si il veut revenir au menu précédent et qui boucle tant qu il n a pas répondu
+        //methode qui renvoie "true" si l'utilisateur veut continuer et "false" si il veut revenir au menu précédent et qui boucle tant qu il n a pas répondu
         public static bool Precedent()
         {
             bool sema=true;
@@ -102,7 +102,7 @@ namespace ConsoleApp4.Vue
             }
             return sema;         
         }
-        // meme methode mais avec un message personnalisé
+        // meme methode mais avec un message personnalisé autre que "continuer"
         public static bool Precedent(string quoi)
         {
             bool sema = true;
