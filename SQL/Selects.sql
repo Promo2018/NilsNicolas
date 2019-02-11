@@ -8,4 +8,3 @@ select * from Agences;
 select * from AssurDoss;
 select * from ParticipDoss;
 select * from Assurances;
-select * from Authentifications;

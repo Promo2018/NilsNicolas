@@ -329,13 +329,15 @@ namespace ConsoleApp4.Controler
             return dossier2;
         }
 
+        // impose de choisir un client pour un dossier
         public static void SetClient(ref DossierReservation dossierc)
         {
 
-                Personne clientc = Personne.RecupPersDoss("selectionner");
+                
                 bool sema = true;
                 while (sema)
                 {
+                    Personne clientc = Personne.RecupPersDoss("selectionner");
                     if (clientc.Id_personne != -1)
                     {
                         sema = false;
@@ -354,7 +356,8 @@ namespace ConsoleApp4.Controler
                     }
                     else
                     {
-                        OutilVue.Afficher("Vous devez selectionner un client");
+                        OutilVue.Afficher("\n\t ###Vous devez selectionner un client pour créer un dossier.###\n\t");
+                    
                     }
                 }
             

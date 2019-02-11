@@ -110,43 +110,44 @@ namespace ConsoleApp4.Controler
         }
         //Controle de la date de naissance
 
-        public static void CDDN (ref Personne voyageur1)
-            {
+        public static void CDDN(ref Personne voyageur1)
+        {
             bool sema8 = true;
             string saisiedate;
 
+
+            while (sema8)
             {
-                while (sema8)
+                if (Controle.Date((saisiedate = OutilVue.Demander("Date de Naissance au format JJMMAAAA")), out DateTime sortie))
                 {
-                    if (Controle.Date((saisiedate = OutilVue.Demander("Date de Naissance au format JJMMAAAA")), out DateTime sortie))
-                    {
-                        sema8 = false;
-                        voyageur1.Datenaissance = sortie;
+                    sema8 = false;
+                    voyageur1.Datenaissance = sortie;
 
-                    }
-                    else
-                    {
-                        OutilVue.Afficher("Format de date non valide");
-                    }
-
+                }
+                else
+                {
+                    OutilVue.Afficher("Format de date non valide");
                 }
 
             }
+
+
         }
 
         //controle pour le select de la date de naissance
         public static void CDDN2(ref Personne voyageur1)
         {
             bool sema8 = true;
-            string saisiedate = OutilVue.Demander("Date de Naissance au format JJMMAAAA");
-            if (ZeroOuVide(saisiedate))
-                {
-                sema8 = false;
-                }
-            else
+            while (sema8)
             {
-                while (sema8)
+                string saisiedate = OutilVue.Demander("Date de Naissance au format JJMMAAAA");
+                if (ZeroOuVide(saisiedate))
                 {
+                    sema8 = false;
+                }
+                else
+                {
+
                     if (Controle.Date(saisiedate, out DateTime sortie))
                     {
                         sema8 = false;
@@ -157,11 +158,12 @@ namespace ConsoleApp4.Controler
                     {
                         OutilVue.Afficher("Format de date non valide");
                     }
-                }
 
+
+                }
             }
 
-            
+
         }
 
         //  Controle de la civilité
@@ -186,11 +188,11 @@ namespace ConsoleApp4.Controler
 
         // Controle du nom pour l'insert
 
-        public static void CNom( ref Personne voyageurv)
+        public static void CNom(ref Personne voyageurv)
         {
-        bool sema3 = true;
-        bool sema4 = true;
-        bool sema2 = true;
+            bool sema3 = true;
+            bool sema4 = true;
+            bool sema2 = true;
             while (sema2 || sema3 || sema4)
             {
                 voyageurv.Nom = OutilVue.Demander("NOM").ToUpper();
@@ -241,7 +243,7 @@ namespace ConsoleApp4.Controler
                 string saisie = OutilVue.Demander("NOM").ToUpper();
                 if (Controle.ZeroOuVide(saisie))
                 {
-                    sema2 = false;sema3 = false;sema4 = false;
+                    sema2 = false; sema3 = false; sema4 = false;
                 }
                 else
                 {
@@ -268,7 +270,7 @@ namespace ConsoleApp4.Controler
                             }
                             else
                             {
-                                
+
                             }
                         }
 
@@ -279,7 +281,7 @@ namespace ConsoleApp4.Controler
 
         // controle prenom 
 
-        public static void CPrenom( ref Personne voyageurv)
+        public static void CPrenom(ref Personne voyageurv)
         {
             bool sema3 = true;
             bool sema4 = true;
@@ -331,7 +333,7 @@ namespace ConsoleApp4.Controler
             bool sema2 = true;
             while (sema2 || sema3 || sema4)
             {
-               string saisie = OutilVue.Demander("prenom").ToLower();
+                string saisie = OutilVue.Demander("prenom").ToLower();
                 if (Controle.ZeroOuVide(saisie))
                 {
                     sema2 = false; sema3 = false; sema4 = false;
@@ -361,7 +363,7 @@ namespace ConsoleApp4.Controler
                             }
                             else
                             {
-                                
+
                             }
                         }
                     }
@@ -390,7 +392,7 @@ namespace ConsoleApp4.Controler
                 else { OutilVue.Afficher("Pas d'adresse e-mail saisie"); sema = true; }
             }
             while (!sema);
-            
+
         }
 
         // controle pour une adresse e-mail obligatoire
@@ -418,20 +420,20 @@ namespace ConsoleApp4.Controler
         }
 
         // Controle pour l'adresse
-        public static void CAdresse (ref Personne voyageurv)
+        public static void CAdresse(ref Personne voyageurv)
         {
             bool sema = true;
 
             while (sema)
             {
-            string saisie = OutilVue.Demander("Adresse");
+                string saisie = OutilVue.Demander("Adresse");
 
                 if (ZeroOuVide(saisie) | OnlyNumber(saisie))
                 {
                     OutilVue.Afficher("Erreur saisie adresse. Renseignez une adresse svp");
                 }
                 else { sema = false; voyageurv.Adresse = saisie; }
-                
+
             }
 
         }
@@ -482,7 +484,7 @@ namespace ConsoleApp4.Controler
                     {
 
                     }
-                    
+
                 }
             }
 
@@ -624,7 +626,8 @@ namespace ConsoleApp4.Controler
                     }
 
                 }
-            }return dossier1.Id_dossier;
+            }
+            return dossier1.Id_dossier;
         }
 
         //controle de saisie de l'Id client facultatif
@@ -651,7 +654,8 @@ namespace ConsoleApp4.Controler
                     }
 
                 }
-            }    return dossier1.Id_client;        
+            }
+            return dossier1.Id_client;
 
         }
 
